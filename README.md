@@ -9,4 +9,6 @@ This package provides a few functions to help with your daily decision making:
 - `pick_activity(energy_level, weather)` - a function to help you pick an acitvity to do based on your energy level and the weather.
 
 ## Team members:
+[Maria Luo](https://github.com/MariaLuo826)
+[Reece Huey](https://github.com/Coffee859)
 [Jubilee Tang](https://github.com/MajesticSeagull26)
