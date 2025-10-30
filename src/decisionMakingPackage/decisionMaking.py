@@ -3,6 +3,22 @@ import random
 
 
 def pick_food(dietary_restriction: str = None) -> None:
+    restrictions = ["kosher",
+        "halal",
+        "jain",
+        "vegetarian",
+        "vegan", 
+        "no_gluten",
+        "no_soy",
+        "no_nuts",
+        "no_dairy",
+        "no_eggs",
+    ]
+    # Default color set
+    allFoods = set()
+    for foods in restrictions.values():
+        allFoods.update(foods)
+
     print("temp, replace with actual print statement")
 
 
