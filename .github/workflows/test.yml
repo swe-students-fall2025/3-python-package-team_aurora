@@ -17,11 +17,14 @@ jobs:
               uses: kojoru/prepare-pipenv@v1
               with:
                   python-version: ${{ matrix.python-version }}
+            - name: Turn on 'editable' mode
+              run: |
+                  pipenv install -e .
             - name: Test with pytest
               run: |
                   pipenv install pytest
                   pipenv --venv
-                  pipenv run python -m pytest tests/test.py -v
+                  pipenv run python -m pytest tests/ -v
     deliver:
         needs: [build]
         runs-on: ubuntu-latest
