@@ -2,8 +2,73 @@
 import random
 
 
+
 def pick_food(dietary_restriction: str = None) -> None:
-    print("temp, replace with actual print statement")
+    # Foods by restriction
+    foods_by_restriction = {
+        "kosher": [
+            "bagel with lox", "matzo ball soup", "tuna salad", "grilled salmon with potatoes",
+            "egg salad sandwich", "falafel plate"
+        ],
+        "halal": [
+            "chicken biryani", "beef kebab plate", "shawarma bowl", "lentil dal with rice",
+            "falafel wrap", "grilled salmon"
+        ],
+        "jain": [
+            "vegetable khichdi", "paneer tikka (no onion/garlic)", "sabudana khichdi",
+            "dal dhokli", "vegetable pulao", "coconut curry"
+        ],
+        "vegetarian": [
+            "margherita pizza", "mushroom risotto", "spinach ravioli", "caprese sandwich",
+            "falafel bowl", "paneer tikka"
+        ],
+        "vegan": [
+            "tofu stir-fry", "chickpea curry", "veggie sushi", "buddha bowl",
+            "lentil bolognese", "quinoa salad"
+        ],
+        "no_gluten": [
+            "rice bowl with chicken", "corn tacos", "pho", "sashimi platter",
+            "thai green curry", "baked sweet potato"
+        ],
+        "no_soy": [
+            "grilled chicken salad", "roasted veggie pasta", "eggplant parm", "mushroom risotto",
+            "omelet with veggies", "lentil soup"
+        ],
+        "no_nuts": [
+            "margherita pizza", "spaghetti pomodoro", "fried rice", "beef tacos",
+            "rotisserie chicken plate", "tomato soup & grilled cheese"
+        ],
+        "no_dairy": [
+            "tom yum soup", "poke bowl", "chicken shawarma wrap (no yogurt sauce)",
+            "vegan ramen", "tofu curry", "bibimbap (no egg)"
+        ],
+        "no_eggs": [
+            "pasta primavera", "mushroom risotto", "vegetable stir-fry", "falafel wrap",
+            "vegan curry", "tofu scramble"
+        ],
+    }
+
+    # Build full set of all foods
+    allFoods = set()
+    for foods in foods_by_restriction.values():
+        allFoods.update(foods)
+
+    # No restriction given — pick from all
+    if dietary_restriction is None:
+        print(f"How about: {random.choice(list(allFoods))}")
+        return
+
+    restriction = dietary_restriction.strip().lower()
+
+    if restriction not in foods_by_restriction:
+        accepted = ", ".join(sorted(foods_by_restriction.keys()))
+        print(f"Sorry, '{restriction}' is not a supported restriction.")
+        print(f"Please choose from: {accepted}")
+        print(f"In the meantime, try: {random.choice(list(allFoods))}")
+        return
+
+    choice = random.choice(foods_by_restriction[restriction])
+    print(f"For a {restriction} diet, you could try: {choice}")
 
 
 def pick_color(mood: str = None, season: str = None) -> None:
