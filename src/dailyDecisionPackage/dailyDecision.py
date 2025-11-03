@@ -53,7 +53,7 @@ def pick_clothes(weather: str = None, mood : str = None) -> None:
             print(f"Choose from: sunny, rainy, snowy, windy")
             print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
         # Valid weather
-        validClothes = set(clothes_by_weather[weather.lower()]) | set(clothes_by_weather["any"])
+        validClothes = set(clothes_by_weather[weather.lower()]))
         print(f"You chose: '{weather}', so why not wear this bad boy? {random.choice(list(validClothes))}")
     # Only mood, no weather
     elif weather is None:
@@ -63,7 +63,7 @@ def pick_clothes(weather: str = None, mood : str = None) -> None:
             print(f"Choose from: casual, formal, athletic, party, beach")
             print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
         # Valid mood
-        validClothes = set(clothes_by_mood[mood.lower()]) | set(clothes_by_mood["any"])
+        validClothes = set(clothes_by_mood[mood.lower()]))
         print(f"You chose: '{mood}', so why not wear this bad boy? {random.choice(list(validClothes))}")
     # Arguments for both weather and mood
     else:
