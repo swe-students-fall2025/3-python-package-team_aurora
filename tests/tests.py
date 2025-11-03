@@ -205,28 +205,28 @@ class TestPickActivity:
         assert "In the meantime, try this activity: " in captured.out
 
     def test_invalid_energy(self, capsys):
-        pick_activity(energy="invalid")
+        pick_activity(energy_level="invalid")
         captured = capsys.readouterr()
         assert "Sorry, 'invalid' is not a supported energy level." in captured.out
         assert "Please choose from: low, medium, high" in captured.out
         assert "In the meantime, try this activity: " in captured.out
     
     def test_invalid_weather_valid_energy(self, capsys):
-        pick_activity(weather="invalid", energy="low")
+        pick_activity(weather="invalid", energy_level="low")
         captured = capsys.readouterr()
         assert "Sorry, 'invalid' is not a supported weather type." in captured.out
         assert "Please choose from: sunny, cloudy, rainy, snowy" in captured.out
         assert "In the meantime, try this activity: " in captured.out
 
     def test_valid_weather_invalid_energy(self, capsys):
-        pick_activity(weather="sunny", energy="invalid")
+        pick_activity(weather="sunny", energy_level="invalid")
         captured = capsys.readouterr()
         assert "Sorry, 'invalid' is not a supported energy level." in captured.out
         assert "Please choose from: low, medium, high" in captured.out
         assert "In the meantime, try this activity: " in captured.out
  
     def test_invalid_weather_invalid_energy(self, capsys):
-        pick_activity(weather="invalid", energy="invalid")
+        pick_activity(weather="invalid", energy_level="invalid")
         captured = capsys.readouterr()
         assert "Sorry, 'invalid' is not a supported weather type." in captured.out
         assert "Please choose from: sunny, cloudy, rainy, snowy" in captured.out
