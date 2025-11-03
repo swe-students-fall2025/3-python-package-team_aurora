@@ -1,7 +1,96 @@
 # This is where we will write our actual functions for the package
 import random
 
+def pick_clothes(weather: str = None, mood : str = None) -> None:
+    clothes_by_weather = {
+        "sunny": [
+            "sports bra", "jersey", "T-shirt", "shorts", "sneakers", "khakis", "jeans", "sandals", "sombrero", "high heels"
+        ],
+        "rainy": [
+            "poncho", "raincoat", "boots"
+        ],
+        "snowy": [
+            "fleece jacket", "scarf", "neckerchief", "beanie", "mittens"
+        ],
+        "windy": [
+            "light jacket", "hoodie", "athletic pants", "earmuffs"
+        ]
+    }
+    clothes_by_mood = {
+        "casual": [
+            "T-shirt", "shorts", "sneakers", "hoodie", "jeans", "sandals"
+        ],
+        "formal": [
+            "necktie", "neckerchief", "bowtie", "tuxedo", "dress shoes", "button-up shir/blouse", "khakis", "skirt"
+        ],
+        "athletic": [
+            "sports bra", "jersey", "cleats", "athletic pants", "headband"
+        ],
+        "party": [
+            "sequin dress", "high heels", "blazer", "fedora", "rings", "slacks", "halter top"
+        ],
+        "beach": [
+            "sandals", "bikini", "swimtrunks", "thong", "speedo", "sombrero", "cap", "one-piece suit", "crocs"
+        ]
+    }
 
+    # build full set of clothes
+    allClothes = set()
+    for clothes in clothes_by_weather.values():
+        allClothes.update(clothes)
+    for clothes in clothes_by_mood.values():
+        allClothes.update(clothes)
+
+    # No arguments (pick random clothes)
+    if weather is None and mood is None:
+        print(f"Try these clothes! They look good on you: {random.choice(list(allClothes))}")
+    # Only weather, no mood
+    elif mood is None:
+        # Invalid weather
+        if weather.lower() not in clothes_by_weather:
+            accepted = ", ".join(sorted(clothes_by_weather.keys()))
+            print(f"Oopsie poopsie! :( '{weather}' isn't a weather!")
+            print(f"Choose from: sunny, rainy, snowy, windy")
+            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+        # Valid weather
+        validClothes = set(clothes_by_weather[weather.lower()]) | set(clothes_by_weather["any"])
+        print(f"You chose: '{weather}', so why not wear this bad boy? {random.choice(list(validClothes))}")
+    # Only mood, no weather
+    elif weather is None:
+        # Invalid mood
+        if mood.lower() not in clothes_by_mood:
+            print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
+            print(f"Choose from: casual, formal, athletic, party, beach")
+            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+        # Valid mood
+        validClothes = set(clothes_by_mood[mood.lower()]) | set(clothes_by_mood["any"])
+        print(f"You chose: '{mood}', so why not wear this bad boy? {random.choice(list(validClothes))}")
+    # Arguments for both weather and mood
+    else:
+        # Invalid weather
+        if weather.lower() not in clothes_by_weather:
+            print(f"Oopsie poopsie! :( '{weather}' isn't a weather!")
+            print(f"Choose from: sunny, rainy, snowy, windy")
+            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+        # Invalid mood
+        if mood.lower() not in clothes_by_mood:
+            print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
+            print(f"Choose from: casual, formal, athletic, party, beach")
+            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+        # Both valid weather and mood
+        validClothes = list(set(clothes_by_mood[mood.lower()]) & set(clothes_by_weather[weather.lower()]))
+        if validClothes:
+            clothes = random.choice(validClothes)
+            print(f"Good choice! For your weather {weather} and mood {mood}, try these clothes out! {clothes}")
+        # but they may not have clothes in common
+        else:
+            rand_weather = random.choice(clothes_by_weather[weather.lower()])
+            rand_mood = random.choice(clothes_by_mood[mood.lower()])
+            print(f"Sorry but your weather and mood didn't fit! But for {weather.lower()} weather, try on       
+                {rand_weather}")
+            print(f"For {mood.lower()} mood, why not give {rand_mood} a shot?")
+    return
+    
 
 def pick_food(dietary_restriction: str = None) -> None:
     # Foods by restriction
@@ -299,6 +388,8 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
     }
     # create set of all activities
     allActivities = set()
+    for activities in activites_by_weather.values():
+        allActivities.update(activities)
     for activities in activities_by_energy_level.values(): 
         allActivities.update(activities)
 
@@ -353,3 +444,4 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         )
         print(f"Try this activity: {random.choice(list(validActivities))}")
         return
+
