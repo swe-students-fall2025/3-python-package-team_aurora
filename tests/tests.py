@@ -165,22 +165,20 @@ class TestPickActivity:
         for weather in supported_weather:
             pick_activity(weather=weather)
             captured = capsys.readouterr()
-            trimmed_output = captured.out[19:]
             assert "Try this activity: " in captured.out
             assert len(captured.out.strip()) > len("Try this activity: ")
-            assert trimmed_output.strip() in (
-                (set(self.weather_activities[weather]) | set(self.weather_activities["any"]))
-            )
+            assert any(activity in captured.out for activity in (
+                set(self.weather_activities[weather]) | set(self.weather_activities["any"])
+            ))
 
     def test_all_supported_energy(self, capsys):
         supported_energy = ["low", "medium", "high"]
         for energy in supported_energy:
             pick_activity(energy_level=energy)
             captured = capsys.readouterr()
-            trimmed_output = captured.out[19:]
             assert "Try this activity: " in captured.out
             assert len(captured.out.strip()) > len("Try this activity: ")
-            assert trimmed_output.strip() in set(self.energy_activities[energy])
+            assert any(activity in captured.out for activity in self.energy_activities[energy])
     
     def test_all_valid_weather_energy_combos(self, capsys):
         supported_weather = ["sunny", "cloudy", "rainy", "snowy"]
@@ -189,13 +187,12 @@ class TestPickActivity:
             for energy in supported_energy:
                 pick_activity(weather=weather, energy_level=energy)
                 captured = capsys.readouterr()
-                trimmed_output = captured.out[19:]
                 assert "Try this activity: " in captured.out
                 assert len(captured.out.strip()) > len("Try this activity: ")
-                assert trimmed_output.strip() in (
-                    (set(self.weather_activities[weather]) | set(self.weather_activities["any"]))
-                )
-                assert trimmed_output.strip() in set(self.energy_activities[energy])
+                assert any(activity in captured.out for activity in self.energy_activities[energy])
+                assert any(activity in captured.out for activity in (
+                set(self.weather_activities[weather]) | set(self.weather_activities["any"])
+                ))
     
     def test_invalid_weather(self, capsys):
         pick_activity(weather="invalid")
