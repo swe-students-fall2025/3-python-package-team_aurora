@@ -24,7 +24,7 @@ jobs:
               run: |
                   pipenv install pytest
                   pipenv --venv
-                  pipenv run python -m pytest tests/ -v
+                  pipenv run python -m pytest tests/tests.py -v
     deliver:
         needs: [build]
         runs-on: ubuntu-latest
