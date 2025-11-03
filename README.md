@@ -1,3 +1,4 @@
+[![CI / CD](https://github.com/swe-students-fall2025/3-python-package-team_aurora/actions/workflows/test.yml/badge.svg)](https://github.com/swe-students-fall2025/3-python-package-team_aurora/actions/workflows/test.yml)
 # Python Package Exercise - Daily Decision Helper
 ## Overview
 Do you ever struggle to make everyday decisions? Whether it's choosing what to eat for lunch, picking an outfit color, or deciding what music to listen to, sometimes the smallest choices can feel overwhelming. DailyDecisions is here to help! This Python package takes the stress out of life's minor decisions by providing randomized suggestions when you need them most.
