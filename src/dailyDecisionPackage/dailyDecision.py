@@ -312,7 +312,7 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         if weather.lower() not in activities_by_weather:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: sunny, cloudy, rainy, snowy")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Valid weather
@@ -338,7 +338,7 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         if weather.lower() not in activities_by_weather:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: sunny, cloudy, rainy, snowy")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Invalid energy level
