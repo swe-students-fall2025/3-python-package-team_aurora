@@ -257,7 +257,104 @@ def pick_color(mood: str = None, season: str = None) -> None:
 
 
 def pick_activity(weather: str = None, energy_level: str = None) -> None:
-    print("")
+    # Activities by weather
+    activities_by_weather = {
+        "sunny": [
+            "go for a walk", "read a book at the park", "explore a new part of the city", "go for a run",
+            "go hiking", "bike around your neighborhood", "go to the beach"
+        ],
+        "cloudy": [
+            "watch the clouds"
+        ],
+        "rainy": [
+            "dance in the rain"
+        ],
+        "snowy": [
+            "make snow angels", "build a snowman", "snowball fight"
+        ],
+        "any": [
+            "watch a movie or TV", "play a video game", "read a book indoors", "listen to a podcast",
+            "listen to music", "write a journal entry", "call a friend", "play a board game",
+            "solve a crossword", "clean your bedroom", "light exercise", "dance", "make a home-cooked meal",
+            "arts & crafts", "yoga", "go to the gym", "go to the club", "go to a party", "clean the house",
+            "painting", "go for a drive"
+        ]
+    }
+    # Activities by energy level
+    activities_by_energy_level = {
+        "low": [
+            "watch a movie or TV", "play a video game", "read a book indoors", "read a book at the park",
+            "listen to a podcast", "listen to music", "write a journal entry", "call a friend",
+            "play a board game", "solve a crossword", "watch the clouds", "painting"
+        ],
+        "medium": [
+            "go for a walk", "clean your bedroom", "light exercise", "dance", "dance in the rain",
+            "make a home-cooked meal", "arts & crafts", "yoga", "make snow angels", "build a snowman",
+            "go to the beach", "go for a drive"
+        ],
+        "high": [
+            "go to the gym", "go for a run", "go hiking", "bike around your neighborhood", "go to the club",
+            "go to a party", "clean the house", "snowball fight", "explore a new part of the city"
+        ]
+    }
+    # create set of all activities
+    allActivities = set()
+    for activities in activities_by_energy_level.values(): 
+        allActivities.update(activities)
+
+    # No arguments (pick random activity)
+    if weather is None and energy_level is None:
+        print(f"Try this activity: {random.choice(list(allActivities))}")
+        return
+    # No energy level argument (weather only)
+    elif energy_level is None:
+        # Invalid weather
+        if weather.lower() not in activities_by_weather:
+            accepted = ", ".join(sorted(activities_by_weather.keys()))
+            print(f"Sorry, '{weather}' is not a supported weather type.")
+            print(f"Please choose from: {accepted}")
+            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            return
+        # Valid weather
+        validActivities = set(activities_by_weather[weather.lower()]) | set(activities_by_weather["any"])
+        print(f"Try this activity: {random.choice(list(validActivities))}")
+        return
+    # No weather argument (energy level only)
+    elif weather is None:
+        # Invalid energy level
+        if energy_level.lower() not in activities_by_energy_level:
+            accepted = ", ".join(sorted(activities_by_energy_level.keys()))
+            print(f"Sorry, '{energy_level}' is not a supported energy level.")
+            print(f"Please choose from: {accepted}")
+            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            return
+        # Valid energy level
+        validActivities = set(activities_by_energy_level[energy_level.lower()])
+        print(f"Try this activity: {random.choice(list(validActivities))}")
+        return
+    # Arguments for both weather and energy level
+    else:
+        # Invalid weather
+        if weather.lower() not in activities_by_weather:
+            accepted = ", ".join(sorted(activities_by_weather.keys()))
+            print(f"Sorry, '{weather}' is not a supported weather type.")
+            print(f"Please choose from: {accepted}")
+            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            return
+        # Invalid energy level
+        if energy_level.lower() not in activities_by_energy_level:
+            accepted = ", ".join(sorted(activities_by_energy_level.keys()))
+            print(f"Sorry, '{energy_level}' is not a supported energy level.")
+            print(f"Please choose from: {accepted}")
+            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            return
+        # Valid arguments
+        validActivities = (
+            ( set(activities_by_weather[weather.lower()]) | set(activities_by_weather["any"]) ) &
+            set(activities_by_energy_level[energy_level.lower()])
+        )
+        print(f"Try this activity: {random.choice(list(validActivities))}")
+        return
 
 
 pick_color("calm", "Summer")
