@@ -12,3 +12,4 @@ This package provides a few functions to help with your daily decision making:
 [Maria Luo](https://github.com/MariaLuo826)
 [Reece Huey](https://github.com/Coffee859)
 [Jubilee Tang](https://github.com/MajesticSeagull26)
+[Anshu Aramandla](https://github.com/aa10150)
