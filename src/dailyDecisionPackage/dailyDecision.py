@@ -312,7 +312,7 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         if weather.lower() not in activities_by_weather:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: sunny, cloudy, rainy, snowy")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Valid weather
@@ -323,9 +323,8 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
     elif weather is None:
         # Invalid energy level
         if energy_level.lower() not in activities_by_energy_level:
-            accepted = ", ".join(sorted(activities_by_energy_level.keys()))
             print(f"Sorry, '{energy_level}' is not a supported energy level.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: low, medium, high")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Valid energy level
@@ -338,14 +337,13 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         if weather.lower() not in activities_by_weather:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: sunny, cloudy, rainy, snowy")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Invalid energy level
         if energy_level.lower() not in activities_by_energy_level:
-            accepted = ", ".join(sorted(activities_by_energy_level.keys()))
             print(f"Sorry, '{energy_level}' is not a supported energy level.")
-            print(f"Please choose from: {accepted}")
+            print(f"Please choose from: low, medium, high")
             print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
             return
         # Valid arguments
