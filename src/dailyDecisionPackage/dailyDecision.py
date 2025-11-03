@@ -353,6 +353,3 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         )
         print(f"Try this activity: {random.choice(list(validActivities))}")
         return
-
-
-pick_color("calm", "Summer")
