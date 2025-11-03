@@ -5,12 +5,12 @@ Do you ever struggle to make everyday decisions? Whether it's choosing what to e
 
 ## Features
 This package provides a few functions to help with your daily decision making:
-- `pick_food(dietary_restriction, cuisine)` - a function to help you pick a food based on your dietary restriction and the type of cuisine you want.
+- `pick_food(dietary_restriction, cuisine)` - a function to help you pick a food based on your dietary restriction.
 - `pick_color(mood, season)` - a function to help you pick a color (of clothing) based on your mood and the season.
 - `pick_activity(energy_level, weather)` - a function to help you pick an acitvity to do based on your energy level and the weather.
 
 ## Team members:
-[Maria Luo](https://github.com/MariaLuo826)
-[Reece Huey](https://github.com/Coffee859)
-[Jubilee Tang](https://github.com/MajesticSeagull26)
-[Anshu Aramandla](https://github.com/aa10150)
+[Maria Luo](https://github.com/MariaLuo826)  
+[Reece Huey](https://github.com/Coffee859)  
+[Jubilee Tang](https://github.com/MajesticSeagull26)  
+[Anshu Aramandla](https://github.com/aa10150)  
