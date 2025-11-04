@@ -1,5 +1,5 @@
 import pytest
-from dailyDecisionPackage.dailyDecision import pick_color, pick_activity, pick_clothes
+from dailyDecisionPackage.dailyDecision import pick_color, pick_activity, pick_clothes, pick_food
 
 
 # Unit tests for pick_clothes function
@@ -149,6 +149,172 @@ class TestPickClothes:
         assert "Choose from: casual, formal, athletic, party, beach" in captured.out
         assert "Otherwise, what do you think of these clothes? " in captured.out
 
+class TestPickFood:
+    foods_by_restriction = {
+        "halal": [
+            "chicken biryani",
+            "beef kebab plate",
+            "shawarma bowl",
+            "lentil dal with rice",
+            "falafel wrap",
+            "grilled salmon",
+        ],
+        "high_protein": [
+            "grilled chicken breast with quinoa",
+            "salmon with asparagus",
+            "beef stir-fry",
+            "lentil salad",
+            "tofu and broccoli bowl",
+            "turkey chili",
+        ],
+        "high_protein": [
+            "grilled chicken breast with quinoa",
+            "salmon with asparagus",
+            "beef stir-fry",
+            "lentil salad",
+            "tofu and broccoli bowl",
+            "turkey chili",
+        ],
+        "jain": [
+            "vegetable khichdi",
+            "paneer tikka (no onion/garlic)",
+            "sabudana khichdi",
+            "dal dhokli",
+            "vegetable pulao",
+            "coconut curry",
+        ],
+        "keto": [
+            "zucchini noodles with pesto",
+            "grilled salmon with avocado",
+            "cauliflower rice stir-fry",
+            "bunless burger with cheese and salad",
+            "omelet with spinach and mushrooms",
+            "chicken caesar salad (no croutons)",
+        ],
+        "kosher": [
+            "bagel with lox",
+            "matzo ball soup",
+            "tuna salad",
+            "grilled salmon with potatoes",
+            "egg salad sandwich",
+            "falafel plate",
+        ],
+        "low_carb": [
+            "grilled chicken and veggies",
+            "beef lettuce wraps",
+            "zoodle bolognese",
+            "egg omelet with avocado",
+            "shrimp and broccoli stir-fry",
+            "cauliflower crust pizza",
+        ],
+        "no_dairy": [
+            "tom yum soup",
+            "poke bowl",
+            "chicken shawarma wrap (no yogurt sauce)",
+            "vegan ramen",
+            "tofu curry",
+            "bibimbap (no egg)",
+        ],
+        "no_eggs": [
+            "pasta primavera",
+            "mushroom risotto",
+            "vegetable stir-fry",
+            "falafel wrap",
+            "vegan curry",
+            "tofu scramble",
+        ],
+        "no_gluten": [
+            "rice bowl with chicken",
+            "corn tacos",
+            "pho",
+            "sashimi platter",
+            "thai green curry",
+            "baked sweet potato",
+        ],
+        "no_nuts": [
+            "margherita pizza",
+            "spaghetti pomodoro",
+            "fried rice",
+            "beef tacos",
+            "rotisserie chicken plate",
+            "tomato soup & grilled cheese",
+        ],
+        "no_nuts": [
+            "margherita pizza",
+            "spaghetti pomodoro",
+            "fried rice",
+            "beef tacos",
+            "rotisserie chicken plate",
+            "tomato soup & grilled cheese",
+        ],
+        "no_soy": [
+            "grilled chicken salad",
+            "roasted veggie pasta",
+            "eggplant parm",
+            "mushroom risotto",
+            "omelet with veggies",
+            "lentil soup",
+        ],
+        "paleo": [
+            "grilled steak with roasted veggies",
+            "salmon with sweet potato mash",
+            "zucchini noodles with tomato sauce",
+            "chicken lettuce wraps",
+            "baked cod with olive oil",
+            "fruit and nut bowl",
+        ],
+        "pescatarian": [
+            "salmon poke bowl",
+            "shrimp tacos",
+            "grilled cod with veggies",
+            "tuna niçoise salad",
+            "sushi combo",
+            "miso-glazed salmon",
+            "fish and chips (light batter)",
+        ],
+        "vegan": [
+            "tofu stir-fry",
+            "chickpea curry",
+            "veggie sushi",
+            "buddha bowl",
+            "lentil bolognese",
+            "quinoa salad",
+        ],
+        "vegetarian": [
+            "margherita pizza",
+            "mushroom risotto",
+            "spinach ravioli",
+            "caprese sandwich",
+            "falafel bowl",
+            "paneer tikka",
+        ],
+    }
+    def test_default_pick(self, capsys):
+        pick_food()
+        out = capsys.readouterr().out.lower()
+        assert "how about:" in out
+
+    def test_valid_restriction(self, capsys):
+        pick_food("vegan")
+        out = capsys.readouterr().out.lower()
+        assert "for a vegan diet" in out
+        assert "try" in out
+
+    def test_invalid_restriction(self, capsys):
+        pick_food("carnivore")
+        out = capsys.readouterr().out.lower()
+        assert "sorry" in out or "not a supported restriction" in out
+        assert "choose from" in out
+
+    def test_case_insensitive(self, capsys):
+        pick_food("VeGeTaRiAn")
+        out = capsys.readouterr().out.lower()
+        assert "for a vegetarian diet" in out
+
+    def test_alias_anything(self, capsys):
+        pick_food("anything")
+        out = capsys.readouterr().out.lower()
+        assert "how about:" in out
 
 # Unit tests for pick_color function
 class TestPickColor:

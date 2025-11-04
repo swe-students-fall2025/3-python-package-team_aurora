@@ -295,12 +295,22 @@ def pick_food(dietary_restriction: str = None) -> None:
 
     restriction = dietary_restriction.strip().lower()
 
+    aliases_any = {
+        "any", "anything", "whatever", "no", "none",
+        "no restriction", "normal", "idk", "anything works"
+    }
+    if restriction in aliases_any:
+        print(f"How about: {random.choice(list(allFoods))}")
+        return
+
+
     if restriction not in foods_by_restriction:
         accepted = ", ".join(sorted(foods_by_restriction.keys()))
         print(f"Sorry, '{restriction}' is not a supported restriction.")
         print(f"Please choose from: {accepted}")
         print(f"In the meantime, try: {random.choice(list(allFoods))}")
         return
+    
 
     choice = random.choice(foods_by_restriction[restriction])
     print(f"For a {restriction} diet, you could try: {choice}")
