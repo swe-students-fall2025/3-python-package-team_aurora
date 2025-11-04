@@ -1,37 +1,57 @@
 # This is where we will write our actual functions for the package
 import random
 
-def pick_clothes(weather: str = None, mood : str = None) -> None:
+
+def pick_clothes(weather: str = None, mood: str = None) -> None:
     clothes_by_weather = {
         "sunny": [
-            "sports bra", "jersey", "T-shirt", "shorts", "sneakers", "khakis", "jeans", "sandals", "sombrero", "high heels"
+            "sports bra",
+            "jersey",
+            "T-shirt",
+            "shorts",
+            "sneakers",
+            "khakis",
+            "jeans",
+            "sandals",
+            "sombrero",
+            "high heels",
         ],
-        "rainy": [
-            "poncho", "raincoat", "boots"
-        ],
-        "snowy": [
-            "fleece jacket", "scarf", "neckerchief", "beanie", "mittens"
-        ],
-        "windy": [
-            "light jacket", "hoodie", "athletic pants", "earmuffs"
-        ]
+        "rainy": ["poncho", "raincoat", "boots"],
+        "snowy": ["fleece jacket", "scarf", "neckerchief", "beanie", "mittens"],
+        "windy": ["light jacket", "hoodie", "athletic pants", "earmuffs"],
     }
     clothes_by_mood = {
-        "casual": [
-            "T-shirt", "shorts", "sneakers", "hoodie", "jeans", "sandals"
-        ],
+        "casual": ["T-shirt", "shorts", "sneakers", "hoodie", "jeans", "sandals"],
         "formal": [
-            "necktie", "neckerchief", "bowtie", "tuxedo", "dress shoes", "button-up shir/blouse", "khakis", "skirt"
+            "necktie",
+            "neckerchief",
+            "bowtie",
+            "tuxedo",
+            "dress shoes",
+            "button-up shirt/blouse",
+            "khakis",
+            "skirt",
         ],
-        "athletic": [
-            "sports bra", "jersey", "cleats", "athletic pants", "headband"
-        ],
+        "athletic": ["sports bra", "jersey", "cleats", "athletic pants", "headband"],
         "party": [
-            "sequin dress", "high heels", "blazer", "fedora", "rings", "slacks", "halter top"
+            "sequin dress",
+            "high heels",
+            "blazer",
+            "fedora",
+            "rings",
+            "slacks",
+            "halter top",
         ],
         "beach": [
-            "sandals", "bikini", "swimtrunks", "thong", "speedo", "sombrero", "cap", "one-piece suit", "crocs"
-        ]
+            "sandals",
+            "bikini",
+            "swimtrunks",
+            "speedo",
+            "sombrero",
+            "cap",
+            "one-piece suit",
+            "crocs",
+        ],
     }
 
     # build full set of clothes
@@ -43,7 +63,9 @@ def pick_clothes(weather: str = None, mood : str = None) -> None:
 
     # No arguments (pick random clothes)
     if weather is None and mood is None:
-        print(f"Try these clothes! They look good on you: {random.choice(list(allClothes))}")
+        print(
+            f"Try these clothes! They look good on you: {random.choice(list(allClothes))}"
+        )
     # Only weather, no mood
     elif mood is None:
         # Invalid weather
@@ -51,89 +73,155 @@ def pick_clothes(weather: str = None, mood : str = None) -> None:
             accepted = ", ".join(sorted(clothes_by_weather.keys()))
             print(f"Oopsie poopsie! :( '{weather}' isn't a weather!")
             print(f"Choose from: sunny, rainy, snowy, windy")
-            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+            print(
+                f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
+            )
+            return
         # Valid weather
-        validClothes = set(clothes_by_weather[weather.lower()]))
-        print(f"You chose: '{weather}', so why not wear this bad boy? {random.choice(list(validClothes))}")
+        validClothes = set(clothes_by_weather[weather.lower()])
+        print(
+            f"You chose: '{weather}', so why not wear this bad boy? {random.choice(list(validClothes))}"
+        )
     # Only mood, no weather
     elif weather is None:
         # Invalid mood
         if mood.lower() not in clothes_by_mood:
             print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
             print(f"Choose from: casual, formal, athletic, party, beach")
-            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+            print(
+                f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
+            )
+            return
         # Valid mood
-        validClothes = set(clothes_by_mood[mood.lower()]))
-        print(f"You chose: '{mood}', so why not wear this bad boy? {random.choice(list(validClothes))}")
+        validClothes = set(clothes_by_mood[mood.lower()])
+        print(
+            f"You chose: '{mood}', so why not wear this bad boy? {random.choice(list(validClothes))}"
+        )
     # Arguments for both weather and mood
     else:
         # Invalid weather
         if weather.lower() not in clothes_by_weather:
             print(f"Oopsie poopsie! :( '{weather}' isn't a weather!")
             print(f"Choose from: sunny, rainy, snowy, windy")
-            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+            print(
+                f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
+            )
         # Invalid mood
         if mood.lower() not in clothes_by_mood:
             print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
             print(f"Choose from: casual, formal, athletic, party, beach")
-            print(f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}")
+            print(
+                f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
+            )
+        # If either is invalid, return early
+        if (
+            weather.lower() not in clothes_by_weather
+            or mood.lower() not in clothes_by_mood
+        ):
+            return
         # Both valid weather and mood
-        validClothes = list(set(clothes_by_mood[mood.lower()]) & set(clothes_by_weather[weather.lower()]))
+        validClothes = list(
+            set(clothes_by_mood[mood.lower()])
+            & set(clothes_by_weather[weather.lower()])
+        )
         if validClothes:
             clothes = random.choice(validClothes)
-            print(f"Good choice! For your weather {weather} and mood {mood}, try these clothes out! {clothes}")
+            print(
+                f"Good choice! For your weather {weather} and mood {mood}, try these clothes out! {clothes}"
+            )
         # but they may not have clothes in common
         else:
             rand_weather = random.choice(clothes_by_weather[weather.lower()])
             rand_mood = random.choice(clothes_by_mood[mood.lower()])
-            print(f"Sorry but your weather and mood didn't fit! But for {weather.lower()} weather, try on       
-                {rand_weather}")
+            print(
+                f"Sorry but your weather and mood didn't fit! But for {weather.lower()} weather, try on {rand_weather}"
+            )
             print(f"For {mood.lower()} mood, why not give {rand_mood} a shot?")
     return
-    
+
 
 def pick_food(dietary_restriction: str = None) -> None:
     # Foods by restriction
     foods_by_restriction = {
         "kosher": [
-            "bagel with lox", "matzo ball soup", "tuna salad", "grilled salmon with potatoes",
-            "egg salad sandwich", "falafel plate"
+            "bagel with lox",
+            "matzo ball soup",
+            "tuna salad",
+            "grilled salmon with potatoes",
+            "egg salad sandwich",
+            "falafel plate",
         ],
         "halal": [
-            "chicken biryani", "beef kebab plate", "shawarma bowl", "lentil dal with rice",
-            "falafel wrap", "grilled salmon"
+            "chicken biryani",
+            "beef kebab plate",
+            "shawarma bowl",
+            "lentil dal with rice",
+            "falafel wrap",
+            "grilled salmon",
         ],
         "jain": [
-            "vegetable khichdi", "paneer tikka (no onion/garlic)", "sabudana khichdi",
-            "dal dhokli", "vegetable pulao", "coconut curry"
+            "vegetable khichdi",
+            "paneer tikka (no onion/garlic)",
+            "sabudana khichdi",
+            "dal dhokli",
+            "vegetable pulao",
+            "coconut curry",
         ],
         "vegetarian": [
-            "margherita pizza", "mushroom risotto", "spinach ravioli", "caprese sandwich",
-            "falafel bowl", "paneer tikka"
+            "margherita pizza",
+            "mushroom risotto",
+            "spinach ravioli",
+            "caprese sandwich",
+            "falafel bowl",
+            "paneer tikka",
         ],
         "vegan": [
-            "tofu stir-fry", "chickpea curry", "veggie sushi", "buddha bowl",
-            "lentil bolognese", "quinoa salad"
+            "tofu stir-fry",
+            "chickpea curry",
+            "veggie sushi",
+            "buddha bowl",
+            "lentil bolognese",
+            "quinoa salad",
         ],
         "no_gluten": [
-            "rice bowl with chicken", "corn tacos", "pho", "sashimi platter",
-            "thai green curry", "baked sweet potato"
+            "rice bowl with chicken",
+            "corn tacos",
+            "pho",
+            "sashimi platter",
+            "thai green curry",
+            "baked sweet potato",
         ],
         "no_soy": [
-            "grilled chicken salad", "roasted veggie pasta", "eggplant parm", "mushroom risotto",
-            "omelet with veggies", "lentil soup"
+            "grilled chicken salad",
+            "roasted veggie pasta",
+            "eggplant parm",
+            "mushroom risotto",
+            "omelet with veggies",
+            "lentil soup",
         ],
         "no_nuts": [
-            "margherita pizza", "spaghetti pomodoro", "fried rice", "beef tacos",
-            "rotisserie chicken plate", "tomato soup & grilled cheese"
+            "margherita pizza",
+            "spaghetti pomodoro",
+            "fried rice",
+            "beef tacos",
+            "rotisserie chicken plate",
+            "tomato soup & grilled cheese",
         ],
         "no_dairy": [
-            "tom yum soup", "poke bowl", "chicken shawarma wrap (no yogurt sauce)",
-            "vegan ramen", "tofu curry", "bibimbap (no egg)"
+            "tom yum soup",
+            "poke bowl",
+            "chicken shawarma wrap (no yogurt sauce)",
+            "vegan ramen",
+            "tofu curry",
+            "bibimbap (no egg)",
         ],
         "no_eggs": [
-            "pasta primavera", "mushroom risotto", "vegetable stir-fry", "falafel wrap",
-            "vegan curry", "tofu scramble"
+            "pasta primavera",
+            "mushroom risotto",
+            "vegetable stir-fry",
+            "falafel wrap",
+            "vegan curry",
+            "tofu scramble",
         ],
     }
 
@@ -349,48 +437,88 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
     # Activities by weather
     activities_by_weather = {
         "sunny": [
-            "go for a walk", "read a book at the park", "explore a new part of the city", "go for a run",
-            "go hiking", "bike around your neighborhood", "go to the beach"
+            "go for a walk",
+            "read a book at the park",
+            "explore a new part of the city",
+            "go for a run",
+            "go hiking",
+            "bike around your neighborhood",
+            "go to the beach",
         ],
-        "cloudy": [
-            "watch the clouds"
-        ],
-        "rainy": [
-            "dance in the rain"
-        ],
-        "snowy": [
-            "make snow angels", "build a snowman", "snowball fight"
-        ],
+        "cloudy": ["watch the clouds"],
+        "rainy": ["dance in the rain"],
+        "snowy": ["make snow angels", "build a snowman", "snowball fight"],
         "any": [
-            "watch a movie or TV", "play a video game", "read a book indoors", "listen to a podcast",
-            "listen to music", "write a journal entry", "call a friend", "play a board game",
-            "solve a crossword", "clean your bedroom", "light exercise", "dance", "make a home-cooked meal",
-            "arts & crafts", "yoga", "go to the gym", "go to the club", "go to a party", "clean the house",
-            "painting", "go for a drive"
-        ]
+            "watch a movie or TV",
+            "play a video game",
+            "read a book indoors",
+            "listen to a podcast",
+            "listen to music",
+            "write a journal entry",
+            "call a friend",
+            "play a board game",
+            "solve a crossword",
+            "clean your bedroom",
+            "light exercise",
+            "dance",
+            "make a home-cooked meal",
+            "arts & crafts",
+            "yoga",
+            "go to the gym",
+            "go to the club",
+            "go to a party",
+            "clean the house",
+            "painting",
+            "go for a drive",
+        ],
     }
     # Activities by energy level
     activities_by_energy_level = {
         "low": [
-            "watch a movie or TV", "play a video game", "read a book indoors", "read a book at the park",
-            "listen to a podcast", "listen to music", "write a journal entry", "call a friend",
-            "play a board game", "solve a crossword", "watch the clouds", "painting"
+            "watch a movie or TV",
+            "play a video game",
+            "read a book indoors",
+            "read a book at the park",
+            "listen to a podcast",
+            "listen to music",
+            "write a journal entry",
+            "call a friend",
+            "play a board game",
+            "solve a crossword",
+            "watch the clouds",
+            "painting",
         ],
         "medium": [
-            "go for a walk", "clean your bedroom", "light exercise", "dance", "dance in the rain",
-            "make a home-cooked meal", "arts & crafts", "yoga", "make snow angels", "build a snowman",
-            "go to the beach", "go for a drive"
+            "go for a walk",
+            "clean your bedroom",
+            "light exercise",
+            "dance",
+            "dance in the rain",
+            "make a home-cooked meal",
+            "arts & crafts",
+            "yoga",
+            "make snow angels",
+            "build a snowman",
+            "go to the beach",
+            "go for a drive",
         ],
         "high": [
-            "go to the gym", "go for a run", "go hiking", "bike around your neighborhood", "go to the club",
-            "go to a party", "clean the house", "snowball fight", "explore a new part of the city"
-        ]
+            "go to the gym",
+            "go for a run",
+            "go hiking",
+            "bike around your neighborhood",
+            "go to the club",
+            "go to a party",
+            "clean the house",
+            "snowball fight",
+            "explore a new part of the city",
+        ],
     }
     # create set of all activities
     allActivities = set()
-    for activities in activites_by_weather.values():
+    for activities in activities_by_weather.values():
         allActivities.update(activities)
-    for activities in activities_by_energy_level.values(): 
+    for activities in activities_by_energy_level.values():
         allActivities.update(activities)
 
     # No arguments (pick random activity)
@@ -404,10 +532,14 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
             print(f"Please choose from: sunny, cloudy, rainy, snowy")
-            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            print(
+                f"In the meantime, try this activity: {random.choice(list(allActivities))}"
+            )
             return
         # Valid weather
-        validActivities = set(activities_by_weather[weather.lower()]) | set(activities_by_weather["any"])
+        validActivities = set(activities_by_weather[weather.lower()]) | set(
+            activities_by_weather["any"]
+        )
         print(f"Try this activity: {random.choice(list(validActivities))}")
         return
     # No weather argument (energy level only)
@@ -416,7 +548,9 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
         if energy_level.lower() not in activities_by_energy_level:
             print(f"Sorry, '{energy_level}' is not a supported energy level.")
             print(f"Please choose from: low, medium, high")
-            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            print(
+                f"In the meantime, try this activity: {random.choice(list(allActivities))}"
+            )
             return
         # Valid energy level
         validActivities = set(activities_by_energy_level[energy_level.lower()])
@@ -429,19 +563,22 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
             accepted = ", ".join(sorted(activities_by_weather.keys()))
             print(f"Sorry, '{weather}' is not a supported weather type.")
             print(f"Please choose from: sunny, cloudy, rainy, snowy")
-            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            print(
+                f"In the meantime, try this activity: {random.choice(list(allActivities))}"
+            )
             return
         # Invalid energy level
         if energy_level.lower() not in activities_by_energy_level:
             print(f"Sorry, '{energy_level}' is not a supported energy level.")
             print(f"Please choose from: low, medium, high")
-            print(f"In the meantime, try this activity: {random.choice(list(allActivities))}")
+            print(
+                f"In the meantime, try this activity: {random.choice(list(allActivities))}"
+            )
             return
         # Valid arguments
         validActivities = (
-            ( set(activities_by_weather[weather.lower()]) | set(activities_by_weather["any"]) ) &
-            set(activities_by_energy_level[energy_level.lower()])
-        )
+            set(activities_by_weather[weather.lower()])
+            | set(activities_by_weather["any"])
+        ) & set(activities_by_energy_level[energy_level.lower()])
         print(f"Try this activity: {random.choice(list(validActivities))}")
         return
-
