@@ -8,82 +8,91 @@ Do you ever struggle to make everyday decisions? Whether it's choosing what to e
 
 ## Installation
 
-1. Install the package using pipenv: `pipenv install -i https://pypi.org/simple/ dailyDecisionPackage`
+1. Install the package using `pipenv`: `pipenv install -i https://pypi.org/simple/dailyDecisionPackage`
 2. Activate the virtual environment: `pipenv shell`
-3. Create a Python program file that imports the package, e.g. `from dailyDecisionPackage import dailyDecision`
+3. Create a Python program file that imports the package and uses it, e.g.:
+    ```
+    from dailyDecisionPackage import dailyDecision
+
+    # This would print out the randomly suggested color
+    dailyDecision.pick_color()
+    ```
+4. Run the program: `python filename.py`
+5. Exit the virutal environment: `exit`
 
 ## Features
 
 This package provides a few functions to help with your daily decision making:
 
--   `pick_clothes(weather, occasion)` - a function to help you pick clothes based on the weather and/or occasion.
--   `pick_food(dietary_restriction)` - a function to help you pick a food based on your dietary restriction.
--   `pick_color(mood, season)` - a function to help you pick a color (of clothing) based on your mood and/or the season.
--   `pick_activity(weather, energy_level)` - a function to help you pick an activity to do based on your energy level and/or the weather.
+-   `dailyDecision.pick_clothes(weather, occasion)` - a function to help you pick clothes based on the weather and/or occasion.
+-   `dailyDecision.pick_food(dietary_restriction)` - a function to help you pick a food based on your dietary restriction.
+-   `dailyDecision.pick_color(mood, season)` - a function to help you pick a color (of clothing) based on your mood and/or the season.
+-   `dailyDecision.pick_activity(weather, energy_level)` - a function to help you pick an activity to do based on your energy level and/or the weather.
 
 ## Usage
 ### Import the Package
 `from dailyDecisionPackage import dailyDecision`
 
 ### Function Documentation
-`dailyDecision.pick_clothes(weather, occasion)`  
+1. `dailyDecision.pick_clothes(weather, occasion)`  
 Suggests clothing items based on weather conditions and/or the occasion.  
 
-**Parameters**:  
-- `weather` (optional): The weather condition - "sunny", "rainy", "snowy", or "windy"  
-- `occasion` (optional): The occasion or dress code - "casual", "formal", "athletic", "party", or "beach"  
+    **Parameters**:  
+    - `weather` (optional): The weather condition - "sunny", "rainy", "snowy", or "windy"  
+    - `occasion` (optional): The occasion or dress code - "casual", "formal", "athletic", "party", or "beach"  
 
-**Behavior**:
-- No arguments: Returns a random clothing item from all available options
-- Only weather: Returns clothing appropriate for that weather
-- Only occasion: Returns clothing appropriate for that occasion
-- Both valid arguments: Returns clothing that fits both criteria (or suggests separate items if no match exists)
-- Invalid input: Displays valid options and suggests a random item from all available options
------
-`dailyDecision.pick_food(dietary_restriction)`  
-Suggests food options based on dietary restrictions.
+    **Behavior**:
+    - No arguments: Returns a random clothing item from all available options
+    - Only weather: Returns clothing appropriate for that weather
+    - Only occasion: Returns clothing appropriate for that occasion
+    - Both valid arguments: Returns clothing that fits both criteria (or suggests separate items if no match exists)
+    - Invalid input: Displays valid options and suggests a random item from all available options
 
-**Parameters**:  
-- `dietary_restriction` (optional): Your dietary need - "halal", "high_protein", "jain", "keto", "kosher", "low_carb", "no_dairy", "no_eggs", "no_gluten", "no_nuts", "no_soy", "paleo", "pescatarian", "vegan", or "vegetarian"
 
-**Behavior**:
-- No argument: Returns a random food from all available options
-- Valid restriction: Returns food that meets the specified dietary restriction
-- Invalid restriction: Displays valid options and suggests a random food from all available options
------
-`pick_color(mood, season)`  
+2. `dailyDecision.pick_food(dietary_restriction)`  
+Suggests food options based on dietary restrictions.  
+
+    **Parameters**:  
+    - `dietary_restriction` (optional): Your dietary need - "halal", "high_protein", "jain", "keto", "kosher", "low_carb", "no_dairy", "no_eggs", "no_gluten", "no_nuts", "no_soy", "paleo", "pescatarian", "vegan", or "vegetarian"
+
+    **Behavior**:
+    - No argument: Returns a random food from all available options
+    - Valid restriction: Returns food that meets the specified dietary restriction
+    - Invalid restriction: Displays valid options and suggests a random food from all available options
+
+3. `dailyDecision.pick_color(mood, season)`  
 Suggests colors based on your mood and/or the current season.
 
-**Parameters**:
-- `mood` (optional): Your emotional state - "happy", "sad", "calm", "energetic", or "angry"
-- `season` (optional): The current season - "winter", "fall", "summer", or "spring"
+    **Parameters**:
+    - `mood` (optional): Your emotional state - "happy", "sad", "calm", "energetic", or "angry"
+    - `season` (optional): The current season - "winter", "fall", "summer", or "spring"
 
-**Behavior**:
-- No arguments: Returns a random color from all available options
-- Only mood: Returns a color matching that mood
-- Only season: Returns a color matching that season
-- Both valid arguments: Returns a color that fits both (or suggests separate colors if no perfect match)
-- Both arguments, but only mood is valid: Displays valid options for seasons and suggests a random color matching the mood
-- Both arguments, but only season is valid: Displays valid options for moods and suggests a random color matching the season
-- Invalid input: Displays valid options and suggests a random color from all available options
------
-`dailyDecision.pick_activity(weather, energy_level)`  
+    **Behavior**:
+    - No arguments: Returns a random color from all available options
+    - Only mood: Returns a color matching that mood
+    - Only season: Returns a color matching that season
+    - Both valid arguments: Returns a color that fits both (or suggests separate colors if no perfect match)
+    - Both arguments, but only mood is valid: Displays valid options for seasons and suggests a random color matching the mood
+    - Both arguments, but only season is valid: Displays valid options for moods and suggests a random color matching the season
+    - Invalid input: Displays valid options and suggests a random color from all available options
+
+4. `dailyDecision.pick_activity(weather, energy_level)`  
 Suggests activities based on weather conditions and/or your energy level.
 
-**Parameters**:
-- `weather` (optional): The weather condition - "sunny", "cloudy", "rainy", or "snowy"
-- `energy_level` (optional): Your current energy - "low", "medium", or "high"
+    **Parameters**:
+    - `weather` (optional): The weather condition - "sunny", "cloudy", "rainy", or "snowy"
+    - `energy_level` (optional): Your current energy - "low", "medium", or "high"
 
-**Behavior**:
-- No arguments: Returns a random activity from all available options
-- Only weather: Returns activities suitable for that weather
-- Only energy level: Returns activities matching your energy level
-- Both arguments: Returns activities that fit both criteria
-- Invalid input: Displays valid options and suggests a random activity from all available options
+    **Behavior**:
+    - No arguments: Returns a random activity from all available options
+    - Only weather: Returns activities suitable for that weather
+    - Only energy level: Returns activities matching your energy level
+    - Both arguments: Returns activities that fit both criteria
+    - Invalid input: Displays valid options and suggests a random activity from all available options
 
 ### Example
 For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](./examples/exampleUsage.py).  
-To run the example: `python exampleUsage.py`
+To run the example from root: `python examples/exampleUsage.py`
 
 ## Contributing
 Want to contribute to this project? Here's how to get started:
@@ -97,7 +106,6 @@ Want to contribute to this project? Here's how to get started:
 Run the unit tests using pytest: `pipenv run pytest tests/tests.py`
 
 ### Building the Package
-
 To build the package locally: `pipenv run python -m build`
 
 ## Team members:
