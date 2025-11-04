@@ -5,6 +5,7 @@ Do you ever struggle to make everyday decisions? Whether it's choosing what to e
 
 ## Features
 This package provides a few functions to help with your daily decision making:
+- `pick_clothes(weather, mood)` - a function to help you pick clothes based on the weather and mood.
 - `pick_food(dietary_restriction, cuisine)` - a function to help you pick a food based on your dietary restriction.
 - `pick_color(mood, season)` - a function to help you pick a color (of clothing) based on your mood and the season.
 - `pick_activity(energy_level, weather)` - a function to help you pick an acitvity to do based on your energy level and the weather.
