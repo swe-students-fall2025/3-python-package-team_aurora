@@ -159,6 +159,10 @@ def pick_food(dietary_restriction: str = None) -> None:
             "falafel wrap",
             "grilled salmon",
         ],
+        "high_protein": [
+            "grilled chicken breast with quinoa", "salmon with asparagus", "beef stir-fry",
+            "lentil salad", "tofu and broccoli bowl", "turkey chili"
+        ],
         "jain": [
             "vegetable khichdi",
             "paneer tikka (no onion/garlic)",
@@ -190,6 +194,10 @@ def pick_food(dietary_restriction: str = None) -> None:
             "sashimi platter",
             "thai green curry",
             "baked sweet potato",
+        ],
+        "no_nuts": [
+            "margherita pizza", "spaghetti pomodoro", "fried rice", "beef tacos",
+            "rotisserie chicken plate", "tomato soup & grilled cheese"
         ],
         "no_soy": [
             "grilled chicken salad",
