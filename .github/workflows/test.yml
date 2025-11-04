@@ -27,7 +27,6 @@ jobs:
     deliver:
         needs: [build]
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/pipfile-experiment'
         timeout-minutes: 5
         steps:
             - uses: actions/checkout@v4
