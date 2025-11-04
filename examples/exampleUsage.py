@@ -64,7 +64,7 @@ print()
 # PICK CLOTHES FUNCTION
 print("\n" + "=" * 70)
 print(
-    "2. pick_clothes(weather, mood) - Get clothing suggestions based on weather and/or mood"
+    "2. pick_clothes(weather, occasion) - Get clothing suggestions based on weather and/or occasion"
 )
 print("=" * 70)
 print()
@@ -79,14 +79,14 @@ print("-" * 70)
 pick_clothes(weather="sunny")
 print()
 
-print("Example 2.3: Only mood provided")
+print("Example 2.3: Only occasion provided")
 print("-" * 70)
-pick_clothes(mood="casual")
+pick_clothes(occasion="casual")
 print()
 
-print("Example 2.4: Both weather and mood provided")
+print("Example 2.4: Both weather and occasion provided")
 print("-" * 70)
-pick_clothes(weather="rainy", mood="formal")
+pick_clothes(weather="rainy", occasion="formal")
 print()
 
 print("Example 2.5: Invalid weather")
@@ -94,9 +94,9 @@ print("-" * 70)
 pick_clothes(weather="invalid")
 print()
 
-print("Example 2.6: Invalid mood")
+print("Example 2.6: Invalid occasion")
 print("-" * 70)
-pick_clothes(mood="invalid")
+pick_clothes(occasion="invalid")
 
 
 # PICK FOOD FUNCTION

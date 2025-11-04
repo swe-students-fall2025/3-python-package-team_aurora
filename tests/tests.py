@@ -21,7 +21,7 @@ class TestPickClothes:
         "snowy": ["fleece jacket", "scarf", "neckerchief", "beanie", "mittens"],
         "windy": ["light jacket", "hoodie", "athletic pants", "earmuffs"],
     }
-    clothes_by_mood = {
+    clothes_by_occasion = {
         "casual": ["T-shirt", "shorts", "sneakers", "hoodie", "jeans", "sandals"],
         "formal": [
             "necktie",
@@ -58,7 +58,7 @@ class TestPickClothes:
     allClothes = set()
     for clothes in clothes_by_weather.values():
         allClothes.update(clothes)
-    for clothes in clothes_by_mood.values():
+    for clothes in clothes_by_occasion.values():
         allClothes.update(clothes)
 
     def test_no_arguments(self, capsys):
@@ -85,27 +85,27 @@ class TestPickClothes:
                 clothes in captured.out for clothes in self.clothes_by_weather[weather]
             )
 
-    def test_all_supported_mood(self, capsys):
-        supported_moods = ["casual", "formal", "athletic", "party", "beach"]
-        for mood in supported_moods:
-            pick_clothes(mood=mood)
+    def test_all_supported_occasion(self, capsys):
+        supported_occasions = ["casual", "formal", "athletic", "party", "beach"]
+        for occasion in supported_occasions:
+            pick_clothes(occasion=occasion)
             captured = capsys.readouterr()
             assert (
-                f"You chose: '{mood}', so why not wear this bad boy? " in captured.out
+                f"You chose: '{occasion}', so why not wear this bad boy? " in captured.out
             )
             assert len(captured.out.strip()) > len(
-                f"You chose: '{mood}', so why not wear this bad boy? "
+                f"You chose: '{occasion}', so why not wear this bad boy? "
             )
             assert any(
-                clothes in captured.out for clothes in self.clothes_by_mood[mood]
+                clothes in captured.out for clothes in self.clothes_by_occasion[occasion]
             )
 
-    def test_both_valid_weather_and_mood(self, capsys):
-        pick_clothes(weather="sunny", mood="casual")
+    def test_both_valid_weather_and_occasion(self, capsys):
+        pick_clothes(weather="sunny", occasion="casual")
         captured = capsys.readouterr()
         assert (
             "Good choice! For your weather" in captured.out
-            or "Sorry but your weather and mood didn't fit!" in captured.out
+            or "Sorry but your weather and occasion didn't fit!" in captured.out
         )
 
     def test_invalid_weather(self, capsys):
@@ -115,37 +115,37 @@ class TestPickClothes:
         assert "Choose from: sunny, rainy, snowy, windy" in captured.out
         assert "Otherwise, what do you think of these clothes? " in captured.out
 
-    def test_invalid_mood(self, capsys):
-        pick_clothes(mood="invalid")
+    def test_invalid_occasion(self, capsys):
+        pick_clothes(occasion="invalid")
         captured = capsys.readouterr()
-        assert "Oopsie poopsie! :( 'invalid' isn't a real mood!" in captured.out
+        assert "Oopsie poopsie! :( 'invalid' isn't a real occasion!" in captured.out
         assert "Choose from: casual, formal, athletic, party, beach" in captured.out
         assert "Otherwise, what do you think of these clothes? " in captured.out
 
-    def test_invalid_weather_valid_mood(self, capsys):
-        supported_moods = ["casual", "formal", "athletic", "party", "beach"]
-        for mood in supported_moods:
-            pick_clothes(weather="invalid", mood=mood)
+    def test_invalid_weather_valid_occasion(self, capsys):
+        supported_occasions = ["casual", "formal", "athletic", "party", "beach"]
+        for occasion in supported_occasions:
+            pick_clothes(weather="invalid", occasion=occasion)
             captured = capsys.readouterr()
             assert "Oopsie poopsie! :( 'invalid' isn't a weather!" in captured.out
             assert "Choose from: sunny, rainy, snowy, windy" in captured.out
             assert "Otherwise, what do you think of these clothes? " in captured.out
 
-    def test_valid_weather_invalid_mood(self, capsys):
+    def test_valid_weather_invalid_occasion(self, capsys):
         supported_weather = ["sunny", "rainy", "snowy", "windy"]
         for weather in supported_weather:
-            pick_clothes(weather=weather, mood="invalid")
+            pick_clothes(weather=weather, occasion="invalid")
             captured = capsys.readouterr()
-            assert "Oopsie poopsie! :( 'invalid' isn't a real mood!" in captured.out
+            assert "Oopsie poopsie! :( 'invalid' isn't a real occasion!" in captured.out
             assert "Choose from: casual, formal, athletic, party, beach" in captured.out
             assert "Otherwise, what do you think of these clothes? " in captured.out
 
     def test_both_invalid(self, capsys):
-        pick_clothes(weather="invalid", mood="invalid")
+        pick_clothes(weather="invalid", occasion="invalid")
         captured = capsys.readouterr()
         assert "Oopsie poopsie! :( 'invalid' isn't a weather!" in captured.out
         assert "Choose from: sunny, rainy, snowy, windy" in captured.out
-        assert "Oopsie poopsie! :( 'invalid' isn't a real mood!" in captured.out
+        assert "Oopsie poopsie! :( 'invalid' isn't a real occasion!" in captured.out
         assert "Choose from: casual, formal, athletic, party, beach" in captured.out
         assert "Otherwise, what do you think of these clothes? " in captured.out
 

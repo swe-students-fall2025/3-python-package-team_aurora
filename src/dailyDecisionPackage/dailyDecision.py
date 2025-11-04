@@ -2,7 +2,7 @@
 import random
 
 
-def pick_clothes(weather: str = None, mood: str = None) -> None:
+def pick_clothes(weather: str = None, occasion: str = None) -> None:
     clothes_by_weather = {
         "sunny": [
             "sports bra",
@@ -20,7 +20,7 @@ def pick_clothes(weather: str = None, mood: str = None) -> None:
         "snowy": ["fleece jacket", "scarf", "neckerchief", "beanie", "mittens"],
         "windy": ["light jacket", "hoodie", "athletic pants", "earmuffs"],
     }
-    clothes_by_mood = {
+    clothes_by_occasion = {
         "casual": ["T-shirt", "shorts", "sneakers", "hoodie", "jeans", "sandals"],
         "formal": [
             "necktie",
@@ -58,19 +58,18 @@ def pick_clothes(weather: str = None, mood: str = None) -> None:
     allClothes = set()
     for clothes in clothes_by_weather.values():
         allClothes.update(clothes)
-    for clothes in clothes_by_mood.values():
+    for clothes in clothes_by_occasion.values():
         allClothes.update(clothes)
 
     # No arguments (pick random clothes)
-    if weather is None and mood is None:
+    if weather is None and occasion is None:
         print(
             f"Try these clothes! They look good on you: {random.choice(list(allClothes))}"
         )
-    # Only weather, no mood
-    elif mood is None:
+    # Only weather, no occasion
+    elif occasion is None:
         # Invalid weather
         if weather.lower() not in clothes_by_weather:
-            accepted = ", ".join(sorted(clothes_by_weather.keys()))
             print(f"Oopsie poopsie! :( '{weather}' isn't a weather!")
             print(f"Choose from: sunny, rainy, snowy, windy")
             print(
@@ -82,22 +81,22 @@ def pick_clothes(weather: str = None, mood: str = None) -> None:
         print(
             f"You chose: '{weather}', so why not wear this bad boy? {random.choice(list(validClothes))}"
         )
-    # Only mood, no weather
+    # Only occasion, no weather
     elif weather is None:
-        # Invalid mood
-        if mood.lower() not in clothes_by_mood:
-            print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
+        # Invalid occasion
+        if occasion.lower() not in clothes_by_occasion:
+            print(f"Oopsie poopsie! :( '{occasion}' isn't a real occasion!")
             print(f"Choose from: casual, formal, athletic, party, beach")
             print(
                 f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
             )
             return
-        # Valid mood
-        validClothes = set(clothes_by_mood[mood.lower()])
+        # Valid occasion
+        validClothes = set(clothes_by_occasion[occasion.lower()])
         print(
-            f"You chose: '{mood}', so why not wear this bad boy? {random.choice(list(validClothes))}"
+            f"You chose: '{occasion}', so why not wear this bad boy? {random.choice(list(validClothes))}"
         )
-    # Arguments for both weather and mood
+    # Arguments for both weather and occasion
     else:
         # Invalid weather
         if weather.lower() not in clothes_by_weather:
@@ -106,9 +105,9 @@ def pick_clothes(weather: str = None, mood: str = None) -> None:
             print(
                 f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
             )
-        # Invalid mood
-        if mood.lower() not in clothes_by_mood:
-            print(f"Oopsie poopsie! :( '{mood}' isn't a real mood!")
+        # Invalid occasion
+        if occasion.lower() not in clothes_by_occasion:
+            print(f"Oopsie poopsie! :( '{occasion}' isn't a real occasion!")
             print(f"Choose from: casual, formal, athletic, party, beach")
             print(
                 f"Otherwise, what do you think of these clothes? {random.choice(list(allClothes))}"
@@ -116,27 +115,27 @@ def pick_clothes(weather: str = None, mood: str = None) -> None:
         # If either is invalid, return early
         if (
             weather.lower() not in clothes_by_weather
-            or mood.lower() not in clothes_by_mood
+            or occasion.lower() not in clothes_by_occasion
         ):
             return
-        # Both valid weather and mood
+        # Both valid weather and occasion
         validClothes = list(
-            set(clothes_by_mood[mood.lower()])
+            set(clothes_by_occasion[occasion.lower()])
             & set(clothes_by_weather[weather.lower()])
         )
         if validClothes:
             clothes = random.choice(validClothes)
             print(
-                f"Good choice! For your weather {weather} and mood {mood}, try these clothes out! {clothes}"
+                f"Good choice! For your weather {weather} and occasion {occasion}, try these clothes out! {clothes}"
             )
         # but they may not have clothes in common
         else:
             rand_weather = random.choice(clothes_by_weather[weather.lower()])
-            rand_mood = random.choice(clothes_by_mood[mood.lower()])
+            rand_occasion = random.choice(clothes_by_occasion[occasion.lower()])
             print(
-                f"Sorry but your weather and mood didn't fit! But for {weather.lower()} weather, try on {rand_weather}"
+                f"Sorry but your weather and occasion didn't fit! But for {weather.lower()} weather, try on {rand_weather}"
             )
-            print(f"For {mood.lower()} mood, why not give {rand_mood} a shot?")
+            print(f"For {occasion.lower()} occasion, why not give {rand_occasion} a shot?")
     return
 
 
