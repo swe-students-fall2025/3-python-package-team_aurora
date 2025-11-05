@@ -38,11 +38,11 @@ This package provides a few functions to help with your daily decision making:
 #### 1. `dailyDecision.pick_clothes(weather, occasion)`  
 Suggests clothing items based on weather conditions and/or the occasion.  
 
-**Parameters**:  
+##### **Parameters**:  
 - `weather` (optional): The weather condition - "sunny", "rainy", "snowy", or "windy"  
 - `occasion` (optional): The occasion or dress code - "casual", "formal", "athletic", "party", or "beach"  
 
-**Behavior**:
+##### **Behavior**:
 - No arguments: Returns a random clothing item from all available options
 - Only weather: Returns clothing appropriate for that weather
 - Only occasion: Returns clothing appropriate for that occasion
@@ -53,10 +53,10 @@ Suggests clothing items based on weather conditions and/or the occasion.
 #### 2. `dailyDecision.pick_food(dietary_restriction)`  
 Suggests food options based on dietary restrictions.  
 
-    **Parameters**:  
+##### **Parameters**:  
     - `dietary_restriction` (optional): Your dietary need - "halal", "high_protein", "jain", "keto", "kosher", "low_carb", "no_dairy", "no_eggs", "no_gluten", "no_nuts", "no_soy", "paleo", "pescatarian", "vegan", or "vegetarian"
 
-    **Behavior**:
+##### **Behavior**:
     - No argument: Returns a random food from all available options
     - Valid restriction: Returns food that meets the specified dietary restriction
     - Invalid restriction: Displays valid options and suggests a random food from all available options
