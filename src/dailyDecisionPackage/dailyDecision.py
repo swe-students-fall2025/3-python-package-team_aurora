@@ -862,7 +862,11 @@ def pick_music(prompt: str = None) -> None:
 
     # Build full set of all songs
     allSongs = set()
-    for lst in list(songs_by_mood.values()) + list(songs_by_activity.values()) + list(songs_by_rhythm.values()):
+    for lst in (
+        list(songs_by_mood.values())
+        + list(songs_by_activity.values())
+        + list(songs_by_rhythm.values())
+    ):
         allSongs.update(lst)
 
     # No prompts given then pick from all
@@ -891,9 +895,14 @@ def pick_music(prompt: str = None) -> None:
     # When keywords don't match
     if not (found_moods or found_activities or found_rhythms):
         accepted = (
-            "moods: "     + ", ".join(sorted(mood_keys))     + "; " +
-            "activities: "+ ", ".join(sorted(activity_keys)) + "; " +
-            "rhythms: "    + ", ".join(sorted(rhythm_keys))
+            "moods: "
+            + ", ".join(sorted(mood_keys))
+            + "; "
+            + "activities: "
+            + ", ".join(sorted(activity_keys))
+            + "; "
+            + "rhythms: "
+            + ", ".join(sorted(rhythm_keys))
         )
         print(f"Sorry, we couldn't recognize any keywords from: '{text}'.")
         print(f"Please include one of these keywords: {accepted}")
@@ -942,11 +951,43 @@ def pick_music(prompt: str = None) -> None:
         # If no intersection then give one suggestion per category
         suggestions = []
         if found_moods:
-            suggestions.append(("mood", random.choice(list(set().union(*[set(songs_by_mood[m]) for m in found_moods])))))
+            mood_keywords = "/".join(found_moods)
+            suggestions.append(
+                (
+                    mood_keywords,
+                    random.choice(
+                        list(set().union(*[set(songs_by_mood[m]) for m in found_moods]))
+                    ),
+                )
+            )
         if found_activities:
-            suggestions.append(("activity", random.choice(list(set().union(*[set(songs_by_activity[a]) for a in found_activities])))))
+            activity_keywords = "/".join(found_activities)
+            suggestions.append(
+                (
+                    activity_keywords,
+                    random.choice(
+                        list(
+                            set().union(
+                                *[set(songs_by_activity[a]) for a in found_activities]
+                            )
+                        )
+                    ),
+                )
+            )
         if found_rhythms:
-            suggestions.append(("rhythm", random.choice(list(set().union(*[set(songs_by_rhythm[s]) for s in found_rhythms])))))
+            rhythm_keywords = "/".join(found_rhythms)
+            suggestions.append(
+                (
+                    rhythm_keywords,
+                    random.choice(
+                        list(
+                            set().union(
+                                *[set(songs_by_rhythm[s]) for s in found_rhythms]
+                            )
+                        )
+                    ),
+                )
+            )
 
         print("No perfect match between your keywords. Here are the tailored picks:")
         for k, v in suggestions:
