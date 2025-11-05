@@ -35,7 +35,7 @@ This package provides a few functions to help with your daily decision making:
 `from dailyDecisionPackage import dailyDecision`
 
 ### Function Documentation
-1. `dailyDecision.pick_clothes(weather, occasion)`  
+#### 1. `dailyDecision.pick_clothes(weather, occasion)`  
 Suggests clothing items based on weather conditions and/or the occasion.  
 
     **Parameters**:  
@@ -50,7 +50,7 @@ Suggests clothing items based on weather conditions and/or the occasion.
     - Invalid input: Displays valid options and suggests a random item from all available options
 
 
-2. `dailyDecision.pick_food(dietary_restriction)`  
+#### 2. `dailyDecision.pick_food(dietary_restriction)`  
 Suggests food options based on dietary restrictions.  
 
     **Parameters**:  
@@ -61,7 +61,7 @@ Suggests food options based on dietary restrictions.
     - Valid restriction: Returns food that meets the specified dietary restriction
     - Invalid restriction: Displays valid options and suggests a random food from all available options
 
-3. `dailyDecision.pick_color(mood, season)`  
+#### 3. `dailyDecision.pick_color(mood, season)`  
 Suggests colors based on your mood and/or the current season.
 
     **Parameters**:
@@ -77,7 +77,7 @@ Suggests colors based on your mood and/or the current season.
     - Both arguments, but only season is valid: Displays valid options for moods and suggests a random color matching the season
     - Invalid input: Displays valid options and suggests a random color from all available options
 
-4. `dailyDecision.pick_activity(weather, energy_level)`  
+#### 4. `dailyDecision.pick_activity(weather, energy_level)`  
 Suggests activities based on weather conditions and/or your energy level.
 
     **Parameters**:
@@ -91,7 +91,7 @@ Suggests activities based on weather conditions and/or your energy level.
     - Both arguments: Returns activities that fit both criteria
     - Invalid input: Displays valid options and suggests a random activity from all available options
 
-5. `dailyDecision.pick_music(prompts)`  
+#### 5. `dailyDecision.pick_music(prompts)`  
 Suggests songs based on the prompt(s) given.
 
     **Parameters**:
