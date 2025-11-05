@@ -97,8 +97,8 @@ Suggests songs based on the prompt(s) given.
 ##### **Parameters**:
 - `prompt` (optional) — a keyword describing what kind of music you're looking for
   - **Mood** examples: "happy", "sad", "calm", "focused", "angry", "romantic", "nostalgic"
-    - **Activity** examples: "study", "workout", "commute", "party", "relex", "focus", "drive", "cook"
-    - **Rhythm** examples: "fast", "mid", "slow", "chill"
+  - **Activity** examples: "study", "workout", "commute", "party", "relex", "focus", "drive", "cook"
+  - **Rhythm** examples: "fast", "mid", "slow", "chill"
 
 ##### **Behavior**:
 - No argument: suggests a random song from the full catalog
