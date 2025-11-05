@@ -2,13 +2,15 @@
 
 # Python Package Exercise - Daily Decision Helper
 
+**PyPI Package:** [dailyDecisionPackage on PyPI](https://pypi.org/project/dailyDecisionPackage/0.0.2/)
+
 ## Overview
 
 Do you ever struggle to make everyday decisions? Whether it's choosing what to eat for lunch, picking an outfit color, or deciding what music to listen to, sometimes the smallest choices can feel overwhelming. DailyDecisions is here to help! This Python package takes the stress out of life's minor decisions by providing randomized suggestions when you need them most.
 
 ## Installation
 
-1. Install the package using `pipenv`: `pipenv install -i https://pypi.org/simple/dailyDecisionPackage`
+1. Install the package using `pipenv`: `pipenv install dailyDecisionPackage==0.0.2`
 2. Activate the virtual environment: `pipenv shell`
 3. Create a Python program file that imports the package and uses it, e.g.:
 
@@ -75,7 +77,9 @@ Suggests food options based on dietary restrictions.
 
 Suggests colors based on your mood and/or the current season.
 
-**Parameters**: - `mood` (optional): Your emotional state - "happy", "sad", "calm", "energetic", or "angry" - `season` (optional): The current season - "winter", "fall", "summer", or "spring"
+**Parameters**:
+-   `mood` (optional): Your emotional state - "happy", "sad", "calm", "energetic", or "angry"
+-   `season` (optional): The current season - "winter", "fall", "summer", or "spring"
 
 **Behavior**:
 
@@ -126,7 +130,7 @@ Suggests songs based on the prompt(s) given. You can provide multiple keywords s
 
 ### Example
 
-For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](./examples/exampleUsage.py).  
+For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](https://github.com/swe-students-fall2025/3-python-package-team_aurora/blob/pipfile-experiment/examples/exampleUsage.py).  
 To run the example from root: `python examples/exampleUsage.py`
 
 ## Contributing
