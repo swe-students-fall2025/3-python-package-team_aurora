@@ -114,3 +114,4 @@ To build the package locally: `pipenv run python -m build`
 [Reece Huey](https://github.com/Coffee859)  
 [Jubilee Tang](https://github.com/MajesticSeagull26)  
 [Anshu Aramandla](https://github.com/aa10150)
+[Natalie Han](https://github.com/nateisnataliehan)
