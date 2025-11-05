@@ -28,6 +28,7 @@ This package provides a few functions to help with your daily decision making:
 -   `dailyDecision.pick_food(dietary_restriction)` - a function to help you pick a food based on your dietary restriction.
 -   `dailyDecision.pick_color(mood, season)` - a function to help you pick a color (of clothing) based on your mood and/or the season.
 -   `dailyDecision.pick_activity(weather, energy_level)` - a function to help you pick an activity to do based on your energy level and/or the weather.
+-   `dailyDecision.pick_music(prompts)` - a function to help you pick a song or songs to listen to based on your prompt(s) (could be mood/activity/rhythm).
 
 ## Usage
 ### Import the Package
@@ -89,6 +90,23 @@ Suggests activities based on weather conditions and/or your energy level.
     - Only energy level: Returns activities matching your energy level
     - Both arguments: Returns activities that fit both criteria
     - Invalid input: Displays valid options and suggests a random activity from all available options
+
+5. `dailyDecision.pick_music(prompts)`  
+Suggests songs based on the prompt(s) given.
+
+    **Parameters**:
+    - `prompt` (optional) — a keyword describing what kind of music you're looking for
+       - **Mood** examples: "happy", "sad", "calm", "focused", "angry", "romantic", "nostalgic"
+       - **Activity** examples: "study", "workout", "commute", "party", "relex", "focus", "drive", "cook"
+       - **Rhythm** examples: "fast", "mid", "slow", "chill"
+
+    **Behavior**:
+    - No argument: suggests a random song from the full catalog
+    - Prompt matches mood/activity/rhythm: returns a random song from the matching category
+    - Prompt appears in multiple categories:
+       - If categories overlap: return one song representing all categories
+       - If not: return separate songs for each category
+    - Invalid input: displays valid options and suggests a random song
 
 ### Example
 For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](./examples/exampleUsage.py).  
