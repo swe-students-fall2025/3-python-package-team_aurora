@@ -31,10 +31,10 @@ This package provides a few functions to help with your daily decision making:
 -   `dailyDecision.pick_music(prompts)` - a function to help you pick a song or songs to listen to based on your prompt(s) (could be mood/activity/rhythm).
 
 ## Usage
-### 1. Import the Package
+### Import the Package
 `from dailyDecisionPackage import dailyDecision`
 
-### 2. Function Documentation
+### Function Documentation
 #### 1. `dailyDecision.pick_clothes(weather, occasion)`  
 Suggests clothing items based on weather conditions and/or the occasion.  
 
@@ -108,7 +108,7 @@ Suggests songs based on the prompt(s) given.
   - If not: return separate songs for each category
 - Invalid input: displays valid options and suggests a random song
 
-### 3. Example
+### Example
 For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](./examples/exampleUsage.py).  
 To run the example from root: `python examples/exampleUsage.py`
 
