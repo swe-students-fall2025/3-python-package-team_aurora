@@ -1,5 +1,5 @@
 import pytest
-from dailyDecisionPackage.dailyDecision import pick_color, pick_activity, pick_clothes, pick_food
+from dailyDecisionPackage.dailyDecision import pick_color, pick_activity, pick_clothes, pick_food, pick_music
 
 
 # Unit tests for pick_clothes function
@@ -598,3 +598,329 @@ class TestPickActivity:
         assert "Sorry, 'invalid' is not a supported weather type." in captured.out
         assert "Please choose from: sunny, cloudy, rainy, snowy" in captured.out
         assert "In the meantime, try this activity: " in captured.out
+
+# Unit tests for pick_music function
+class TestPickMusic:
+    songs_by_mood = {
+        "happy": [
+            "Happy - Pharrell Williams",
+            "Walking on Sunshine - Katrina & The Waves",
+            "Shut Up and Dance - WALK THE MOON",
+            "Good as Hell - Lizzo",
+            "Uptown Funk - Mark Ronson ft. Bruno Mars",
+            "I Gotta Feeling - The Black Eyed Peas",
+            "Best Day of My Life - American Authors",
+            "Can’t Stop The Feeling! - Justin Timberlake",
+        ],
+        "sad": [
+            "Someone Like You - Adele",
+            "Fix You - Coldplay",
+            "Skinny Love - Bon Iver",
+            "The Night We Met - Lord Huron",
+            "All I Want - Kodaline",
+            "Happier - Ed Sheeran",
+            "When The Party's Over - Billie Eilish",
+            "Let Her Go - Passenger",
+        ],
+        "calm": [
+            "Holocene - Bon Iver",
+            "Bloom - The Paper Kites",
+            "Budapest - George Ezra",
+            "Photograph - Ed Sheeran",
+            "Lost in Japan - Shawn Mendes",
+            "Rivers and Roads - The Head and the Heart",
+            "Banana Pancakes - Jack Johnson",
+            "Ocean Eyes - Billie Eilish",
+        ],
+        "focused": [
+            "Weightless - Marconi Union",
+            "Experience - Ludovico Einaudi",
+            "Sunset Lover - Petit Biscuit",
+            "Intro - The xx",
+            "Comptine d’un autre été - Yann Tiersen",
+            "We Move Lightly - Dustin O’Halloran",
+            "Midnight - Lane 8",
+            "Night Owl - Galimatias",
+        ],
+        "angry": [
+            "Smells Like Teen Spirit - Nirvana",
+            "In the End - Linkin Park",
+            "Killing In The Name - Rage Against The Machine",
+            "Enter Sandman - Metallica",
+            "Duality - Slipknot",
+            "Hail to the King - Avenged Sevenfold",
+            "Papercut - Linkin Park",
+            "Break Stuff - Limp Bizkit",
+        ],
+        "romantic": [
+            "All of Me - John Legend",
+            "Perfect - Ed Sheeran",
+            "Just The Way You Are - Bruno Mars",
+            "Make You Feel My Love - Adele",
+            "Stay With Me - Sam Smith",
+            "Yellow - Coldplay",
+            "Say You Won’t Let Go - James Arthur",
+            "Die For You - The Weeknd",
+        ],
+        "nostalgic": [
+            "Wonderwall - Oasis",
+            "Mr. Brightside - The Killers",
+            "Iris - Goo Goo Dolls",
+            "Chasing Cars - Snow Patrol",
+            "Hey There Delilah - Plain White T’s",
+            "Viva La Vida - Coldplay",
+            "Stacy’s Mom - Fountains of Wayne",
+            "Seven Nation Army - The White Stripes",
+        ],
+    }
+
+    songs_by_activity = {
+        "study": [
+            "Experience - Ludovico Einaudi",
+            "River Flows in You - Yiruma",
+            "Sunset Lover - Petit Biscuit",
+            "Night Owl - Galimatias",
+            "Weightless - Marconi Union",
+            "Intro - The xx",
+            "We Move Lightly - Dustin O’Halloran",
+            "Gymnopédie No.1 - Erik Satie",
+        ],
+        "workout": [
+            "Stronger - Kanye West",
+            "Lose Yourself - Eminem",
+            "Can’t Hold Us - Macklemore & Ryan Lewis",
+            "Don’t Start Now - Dua Lipa",
+            "Eye of the Tiger - Survivor",
+            "Till I Collapse - Eminem",
+            "Believer - Imagine Dragons",
+            "Remember the Name - Fort Minor",
+        ],
+        "commute": [
+            "Budapest - George Ezra",
+            "Riptide - Vance Joy",
+            "Viva La Vida - Coldplay",
+            "Paris - The Chainsmokers",
+            "Feel It Still - Portugal. The Man",
+            "Blinding Lights - The Weeknd",
+            "Pocket Full of Sunshine - Natasha Bedingfield",
+            "Electric Feel - MGMT",
+        ],
+        "party": [
+            "Uptown Funk - Mark Ronson ft. Bruno Mars",
+            "Levitating - Dua Lipa",
+            "One Kiss - Calvin Harris & Dua Lipa",
+            "Hey Ya! - OutKast",
+            "Turn Down for What - DJ Snake & Lil Jon",
+            "Starboy - The Weeknd",
+            "I Like It - Cardi B",
+            "Low - Flo Rida",
+        ],
+        "relax": [
+            "Better Together - Jack Johnson",
+            "Holocene - Bon Iver",
+            "Banana Pancakes - Jack Johnson",
+            "Bloom - The Paper Kites",
+            "I’m Yours - Jason Mraz",
+            "Budapest - George Ezra",
+            "Ocean Eyes - Billie Eilish",
+            "Sunflower - Rex Orange County",
+        ],
+        "focus": [
+            "Experience - Ludovico Einaudi",
+            "Midnight - Lane 8",
+            "Open Eye Signal - Jon Hopkins",
+            "Saturn - Sleeping at Last",
+            "Prelude in E Minor - Chopin",
+            "Outro - M83",
+            "We Move Lightly - Dustin O’Halloran",
+            "Sunset Lover - Petit Biscuit",
+        ],
+        "drive": [
+            "Midnight City - M83",
+            "Blinding Lights - The Weeknd",
+            "Shut Up and Drive - Rihanna",
+            "Ride - Twenty One Pilots",
+            "On the Road Again - Willie Nelson",
+            "Take Me Out - Franz Ferdinand",
+            "Go Your Own Way - Fleetwood Mac",
+            "Feel Good Inc. - Gorillaz",
+        ],
+        "cook": [
+            "Put Your Records On - Corinne Bailey Rae",
+            "Sunday Morning - Maroon 5",
+            "Mariposa - Peach Tree Rascals",
+            "Budapest - George Ezra",
+            "Brown Eyed Girl - Van Morrison",
+            "Best Part - Daniel Caesar ft. H.E.R.",
+            "I’m Yours - Jason Mraz",
+            "Dreams - Fleetwood Mac",
+        ],
+    }
+
+    songs_by_rhythm = {
+        "fast": [
+            "Don’t Start Now - Dua Lipa",
+            "Levitating - Dua Lipa",
+            "On Top of the World - Imagine Dragons",
+            "Blinding Lights - The Weeknd",
+            "Can’t Hold Us - Macklemore & Ryan Lewis",
+            "Don’t Stop Me Now - Queen",
+            "We Found Love - Rihanna",
+            "Titanium - David Guetta ft. Sia",
+        ],
+        "mid": [
+            "Viva La Vida - Coldplay",
+            "Counting Stars - OneRepublic",
+            "Shut Up and Dance - WALK THE MOON",
+            "Riptide - Vance Joy",
+            "Feel It Still - Portugal. The Man",
+            "Send Me On My Way - Rusted Root",
+            "Electric Feel - MGMT",
+            "Stolen Dance - Milky Chance",
+        ],
+        "slow": [
+            "All of Me - John Legend",
+            "Let Her Go - Passenger",
+            "Skinny Love - Bon Iver",
+            "Stay With Me - Sam Smith",
+            "River Flows in You - Yiruma",
+            "Holocene - Bon Iver",
+            "Make You Feel My Love - Adele",
+            "Fix You - Coldplay",
+        ],
+        "chill": [
+            "Sunset Lover - Petit Biscuit",
+            "Night Owl - Galimatias",
+            "Lovely - Billie Eilish & Khalid",
+            "Lost in Japan - Shawn Mendes",
+            "Beyond - Leon Bridges",
+            "Talk - Khalid",
+            "Put It All on Me - Ed Sheeran",
+            "Warm - Majid Jordan",
+        ],
+    }
+    
+    all_mood_songs = set()
+    for songs in songs_by_mood.values():
+        all_mood_songs.update(songs)
+    all_activity_songs = set()
+    for songs in songs_by_activity.values():
+        all_activity_songs.update(songs)
+    all_rhythm_songs = set()
+    for songs in songs_by_rhythm.values():
+        all_rhythm_songs.update(songs)
+
+    allSongs = set()
+    for lst in [all_mood_songs, all_activity_songs, all_rhythm_songs]:
+        allSongs.update(lst)
+    
+    def test_default_pick_from_catalog(self, capsys):
+        pick_music()
+        out = capsys.readouterr().out
+        assert "How about:" in out
+        assert any(song in out for song in self.allSongs)
+
+    def test_alias_anything_from_catalog(self, capsys):
+        pick_music("anything")
+        out = capsys.readouterr().out
+        assert "How about:" in out
+        assert any(song in out for song in self.allSongs)
+
+    def test_unrecognized_prompt_guidance_and_fallback(self, capsys):
+        pick_music("unicorn vibes xyz")
+        out = capsys.readouterr().out.lower()
+        assert "sorry, we couldn't recognize any keywords" in out
+        assert "please include one of these keywords" in out
+        assert "but we've picked something for you to try" in out
+        assert any(song.lower() in out for song in self.allSongs)
+
+    def test_single_mood(self, capsys):
+        pick_music("calm")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in self.songs_by_mood["calm"])
+
+    def test_single_activity(self, capsys):
+        pick_music("study")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in self.songs_by_activity["study"])
+
+    def test_single_rhythm(self, capsys):
+        pick_music("slow")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in self.songs_by_rhythm["slow"])
+
+    def test_multiple_moods_union_still_perfect_match(self, capsys):
+        union_set = set(self.songs_by_mood["calm"]) | set(self.songs_by_mood["happy"])
+        pick_music("calm happy")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in union_set)
+
+    def test_multiple_activities_union_still_perfect_match(self, capsys):
+        union_set = set(self.songs_by_activity["study"]) | set(self.songs_by_activity["focus"])
+        pick_music("study focus")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in union_set)
+
+    def test_activity_and_rhythm_with_intersection(self, capsys):
+        act_set = set(self.songs_by_activity["workout"])
+        tmp_set = set(self.songs_by_rhythm["fast"])
+        inter   = act_set & tmp_set
+        assert len(inter) > 0
+        pick_music("workout fast")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in inter)
+
+    def test_mood_and_rhythm_no_intersection_tailored(self, capsys):
+        mood_set = set(self.songs_by_mood["angry"])
+        tmp_set  = set(self.songs_by_rhythm["chill"])
+        inter    = mood_set & tmp_set
+        assert len(inter) == 0
+        pick_music("angry chill")
+        out = capsys.readouterr().out
+        assert "No perfect match between your keywords." in out
+        assert "Here are the tailored picks:" in out
+
+    def test_valid_rhythm_with_invalid_token_still_works(self, capsys):
+        pick_music("abcdefg fast ???")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in self.songs_by_rhythm["fast"])
+
+    def test_alias_variants_any_anything_works(self, capsys):
+        for alias in ["any", "Any", "anything works", "NONE", "no", "idk"]:
+            pick_music(alias)
+            out = capsys.readouterr().out
+            assert "How about:" in out
+            assert any(song in out for song in self.allSongs)
+
+    def test_punctuation_and_spacing_robustness(self, capsys):
+        pick_music("  calm,   study!!!   slow?? ")
+        out = capsys.readouterr().out
+        assert ("Perfect match" in out) or ("No perfect match between your keywords." in out)
+
+    def test_invalid_then_valid_category_only_uses_valid(self, capsys):
+        pick_music("zzz study")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert "Sorry" not in out
+        assert any(song in out for song in self.songs_by_activity["study"])
+
+    def test_upper_mixed_case_keywords(self, capsys):
+        pick_music("HaPpY")
+        out = capsys.readouterr().out
+        assert "Perfect match" in out
+        assert any(song in out for song in self.songs_by_mood["happy"])
+
+    def test_blank_string_treated_as_unrecognized(self, capsys):
+        pick_music("   ")
+        out = capsys.readouterr().out.lower()
+        assert "sorry, we couldn't recognize any keywords" in out
+        assert "please include one of these keywords" in out
+        assert "but we've picked something for you to try" in out
+        assert any(song.lower() in out for song in self.allSongs)
