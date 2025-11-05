@@ -10,7 +10,7 @@ authors = [
     { name = "Jubilee Tang" },
     { name = "Maria Lee" },
     { name = "Reece Huey" },
-    { name = "Anshu Aramandla"}
+    { name = "Anshu Aramandla"},
     { name = "Natalie Han"}
 ]
 license = "GPL-3.0-or-later"
