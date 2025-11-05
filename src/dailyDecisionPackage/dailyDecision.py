@@ -1,6 +1,6 @@
 # This is where we will write our actual functions for the package
 import random
-
+import re
 
 def pick_clothes(weather: str = None, occasion: str = None) -> None:
     clothes_by_weather = {
@@ -657,4 +657,339 @@ def pick_activity(weather: str = None, energy_level: str = None) -> None:
             print(
                 f"Sorry, no perfect match! But for now try: {random.choice(list(allActivities))}"
             )
+        return
+
+def pick_music(prompt: str = None) -> None:
+    # Songs by prompt
+    songs_by_mood = {
+        "happy": [
+            "Happy - Pharrell Williams",
+            "Walking on Sunshine - Katrina & The Waves",
+            "Shut Up and Dance - WALK THE MOON",
+            "Good as Hell - Lizzo",
+            "Uptown Funk - Mark Ronson ft. Bruno Mars",
+            "I Gotta Feeling - The Black Eyed Peas",
+            "Best Day of My Life - American Authors",
+            "Can’t Stop The Feeling! - Justin Timberlake",
+        ],
+        "sad": [
+            "Someone Like You - Adele",
+            "Fix You - Coldplay",
+            "Skinny Love - Bon Iver",
+            "The Night We Met - Lord Huron",
+            "All I Want - Kodaline",
+            "Happier - Ed Sheeran",
+            "When The Party's Over - Billie Eilish",
+            "Let Her Go - Passenger",
+        ],
+        "calm": [
+            "Holocene - Bon Iver",
+            "Bloom - The Paper Kites",
+            "Budapest - George Ezra",
+            "Photograph - Ed Sheeran",
+            "Lost in Japan - Shawn Mendes",
+            "Rivers and Roads - The Head and the Heart",
+            "Banana Pancakes - Jack Johnson",
+            "Ocean Eyes - Billie Eilish",
+        ],
+        "focused": [
+            "Weightless - Marconi Union",
+            "Experience - Ludovico Einaudi",
+            "Sunset Lover - Petit Biscuit",
+            "Intro - The xx",
+            "Comptine d’un autre été - Yann Tiersen",
+            "We Move Lightly - Dustin O’Halloran",
+            "Midnight - Lane 8",
+            "Night Owl - Galimatias",
+        ],
+        "angry": [
+            "Smells Like Teen Spirit - Nirvana",
+            "In the End - Linkin Park",
+            "Killing In The Name - Rage Against The Machine",
+            "Enter Sandman - Metallica",
+            "Duality - Slipknot",
+            "Hail to the King - Avenged Sevenfold",
+            "Papercut - Linkin Park",
+            "Break Stuff - Limp Bizkit",
+        ],
+        "romantic": [
+            "All of Me - John Legend",
+            "Perfect - Ed Sheeran",
+            "Just The Way You Are - Bruno Mars",
+            "Make You Feel My Love - Adele",
+            "Stay With Me - Sam Smith",
+            "Yellow - Coldplay",
+            "Say You Won’t Let Go - James Arthur",
+            "Die For You - The Weeknd",
+        ],
+        "nostalgic": [
+            "Wonderwall - Oasis",
+            "Mr. Brightside - The Killers",
+            "Iris - Goo Goo Dolls",
+            "Chasing Cars - Snow Patrol",
+            "Hey There Delilah - Plain White T’s",
+            "Viva La Vida - Coldplay",
+            "Stacy’s Mom - Fountains of Wayne",
+            "Seven Nation Army - The White Stripes",
+        ],
+    }
+
+    songs_by_activity = {
+        "study": [
+            "Experience - Ludovico Einaudi",
+            "River Flows in You - Yiruma",
+            "Sunset Lover - Petit Biscuit",
+            "Night Owl - Galimatias",
+            "Weightless - Marconi Union",
+            "Intro - The xx",
+            "We Move Lightly - Dustin O’Halloran",
+            "Gymnopédie No.1 - Erik Satie",
+        ],
+        "workout": [
+            "Stronger - Kanye West",
+            "Lose Yourself - Eminem",
+            "Can’t Hold Us - Macklemore & Ryan Lewis",
+            "Don’t Start Now - Dua Lipa",
+            "Eye of the Tiger - Survivor",
+            "Till I Collapse - Eminem",
+            "Believer - Imagine Dragons",
+            "Remember the Name - Fort Minor",
+        ],
+        "commute": [
+            "Budapest - George Ezra",
+            "Riptide - Vance Joy",
+            "Viva La Vida - Coldplay",
+            "Paris - The Chainsmokers",
+            "Feel It Still - Portugal. The Man",
+            "Blinding Lights - The Weeknd",
+            "Pocket Full of Sunshine - Natasha Bedingfield",
+            "Electric Feel - MGMT",
+        ],
+        "party": [
+            "Uptown Funk - Mark Ronson ft. Bruno Mars",
+            "Levitating - Dua Lipa",
+            "One Kiss - Calvin Harris & Dua Lipa",
+            "Hey Ya! - OutKast",
+            "Turn Down for What - DJ Snake & Lil Jon",
+            "Starboy - The Weeknd",
+            "I Like It - Cardi B",
+            "Low - Flo Rida",
+        ],
+        "relax": [
+            "Better Together - Jack Johnson",
+            "Holocene - Bon Iver",
+            "Banana Pancakes - Jack Johnson",
+            "Bloom - The Paper Kites",
+            "I’m Yours - Jason Mraz",
+            "Budapest - George Ezra",
+            "Ocean Eyes - Billie Eilish",
+            "Sunflower - Rex Orange County",
+        ],
+        "focus": [
+            "Experience - Ludovico Einaudi",
+            "Midnight - Lane 8",
+            "Open Eye Signal - Jon Hopkins",
+            "Saturn - Sleeping at Last",
+            "Prelude in E Minor - Chopin",
+            "Outro - M83",
+            "We Move Lightly - Dustin O’Halloran",
+            "Sunset Lover - Petit Biscuit",
+        ],
+        "drive": [
+            "Midnight City - M83",
+            "Blinding Lights - The Weeknd",
+            "Shut Up and Drive - Rihanna",
+            "Ride - Twenty One Pilots",
+            "On the Road Again - Willie Nelson",
+            "Take Me Out - Franz Ferdinand",
+            "Go Your Own Way - Fleetwood Mac",
+            "Feel Good Inc. - Gorillaz",
+        ],
+        "cook": [
+            "Put Your Records On - Corinne Bailey Rae",
+            "Sunday Morning - Maroon 5",
+            "Mariposa - Peach Tree Rascals",
+            "Budapest - George Ezra",
+            "Brown Eyed Girl - Van Morrison",
+            "Best Part - Daniel Caesar ft. H.E.R.",
+            "I’m Yours - Jason Mraz",
+            "Dreams - Fleetwood Mac",
+        ],
+    }
+
+    songs_by_rhythm = {
+        "fast": [
+            "Don’t Start Now - Dua Lipa",
+            "Levitating - Dua Lipa",
+            "On Top of the World - Imagine Dragons",
+            "Blinding Lights - The Weeknd",
+            "Can’t Hold Us - Macklemore & Ryan Lewis",
+            "Don’t Stop Me Now - Queen",
+            "We Found Love - Rihanna",
+            "Titanium - David Guetta ft. Sia",
+        ],
+        "mid": [
+            "Viva La Vida - Coldplay",
+            "Counting Stars - OneRepublic",
+            "Shut Up and Dance - WALK THE MOON",
+            "Riptide - Vance Joy",
+            "Feel It Still - Portugal. The Man",
+            "Send Me On My Way - Rusted Root",
+            "Electric Feel - MGMT",
+            "Stolen Dance - Milky Chance",
+        ],
+        "slow": [
+            "All of Me - John Legend",
+            "Let Her Go - Passenger",
+            "Skinny Love - Bon Iver",
+            "Stay With Me - Sam Smith",
+            "River Flows in You - Yiruma",
+            "Holocene - Bon Iver",
+            "Make You Feel My Love - Adele",
+            "Fix You - Coldplay",
+        ],
+        "chill": [
+            "Sunset Lover - Petit Biscuit",
+            "Night Owl - Galimatias",
+            "Lovely - Billie Eilish & Khalid",
+            "Lost in Japan - Shawn Mendes",
+            "Beyond - Leon Bridges",
+            "Talk - Khalid",
+            "Put It All on Me - Ed Sheeran",
+            "Warm - Majid Jordan",
+        ],
+    }
+
+    # Build full set of all songs
+    allSongs = set()
+    for lst in (
+        list(songs_by_mood.values())
+        + list(songs_by_activity.values())
+        + list(songs_by_rhythm.values())
+    ):
+        allSongs.update(lst)
+
+    # No prompts given then pick from all
+    if prompt is None:
+        print(f"How about: {random.choice(list(allSongs))}")
+        return
+
+    text = prompt.strip().lower()
+    aliases_any = {"any", "anything", "whatever", "no", "none", "idk", "anything works"}
+    if text in aliases_any:
+        print(f"How about: {random.choice(list(allSongs))}")
+        return
+
+    # Disassemble the prompts into set of single prompt
+    tokens = re.findall(r"[a-zA-Z]+", text)
+
+    mood_keys     = set(songs_by_mood.keys())
+    activity_keys = set(songs_by_activity.keys())
+    rhythm_keys    = set(songs_by_rhythm.keys())
+
+    # Check the keywords
+    found_moods      = [t for t in tokens if t in mood_keys]
+    found_activities = [t for t in tokens if t in activity_keys]
+    found_rhythms     = [t for t in tokens if t in rhythm_keys]
+
+    # When keywords don't match
+    if not (found_moods or found_activities or found_rhythms):
+        accepted = (
+            "moods: "
+            + ", ".join(sorted(mood_keys))
+            + "; "
+            + "activities: "
+            + ", ".join(sorted(activity_keys))
+            + "; "
+            + "rhythms: "
+            + ", ".join(sorted(rhythm_keys))
+        )
+        print(f"Sorry, we couldn't recognize any keywords from: '{text}'.")
+        print(f"Please include one of these keywords: {accepted}")
+        print(f"But we've picked something for you to try: {random.choice(list(allSongs))}")
+        return
+
+    # Collect possible songs based on all recognized keyword sets
+    candidate_sets = []
+
+    if found_moods:
+        mood_union = set()
+        for m in found_moods:
+            mood_union.update(songs_by_mood[m])
+        candidate_sets.append(mood_union)
+
+    if found_activities:
+        act_union = set()
+        for a in found_activities:
+            act_union.update(songs_by_activity[a])
+        candidate_sets.append(act_union)
+
+    if found_rhythms:
+        rhythm_union = set()
+        for s in found_rhythms:
+            rhythm_union.update(songs_by_rhythm[s])
+        candidate_sets.append(rhythm_union)
+
+    # Try to find songs that satisfy ALL categories
+    if candidate_sets:
+        inter = set.intersection(*candidate_sets) if len(candidate_sets) > 1 else candidate_sets[0]
+
+        # If found perfect match across all categories
+        if inter:
+            picked = random.choice(list(inter))
+            summary_parts = []
+            if found_moods:
+                summary_parts.append("/".join(found_moods))
+            if found_activities:
+                summary_parts.append("/".join(found_activities))
+            if found_rhythms:
+                summary_parts.append("/".join(found_rhythms))
+            summary = " & ".join(summary_parts)
+            print(f"Perfect match for {summary}. Try: {picked}")
+            return
+
+        # If no intersection then give one suggestion per category
+        suggestions = []
+        if found_moods:
+            mood_keywords = "/".join(found_moods)
+            suggestions.append(
+                (
+                    mood_keywords,
+                    random.choice(
+                        list(set().union(*[set(songs_by_mood[m]) for m in found_moods]))
+                    ),
+                )
+            )
+        if found_activities:
+            activity_keywords = "/".join(found_activities)
+            suggestions.append(
+                (
+                    activity_keywords,
+                    random.choice(
+                        list(
+                            set().union(
+                                *[set(songs_by_activity[a]) for a in found_activities]
+                            )
+                        )
+                    ),
+                )
+            )
+        if found_rhythms:
+            rhythm_keywords = "/".join(found_rhythms)
+            suggestions.append(
+                (
+                    rhythm_keywords,
+                    random.choice(
+                        list(
+                            set().union(
+                                *[set(songs_by_rhythm[s]) for s in found_rhythms]
+                            )
+                        )
+                    ),
+                )
+            )
+
+        print("No perfect match between your keywords. Here are the tailored picks:")
+        for k, v in suggestions:
+            print(f"- For {k}, try: {v}")
         return

@@ -13,46 +13,55 @@ print()
 
 print("Example 1.1: No arguments - random color")
 print("-" * 70)
+print("dailyDecision.pick_color()")
 dailyDecision.pick_color()
 print()
 
 print("Example 1.2: Only mood provided")
 print("-" * 70)
+print('dailyDecision.pick_color(mood="happy")')
 dailyDecision.pick_color(mood="happy")
 print()
 
 print("Example 1.3: Only season provided")
 print("-" * 70)
+print('dailyDecision.pick_color(season="summer")')
 dailyDecision.pick_color(season="summer")
 print()
 
 print("Example 1.4: Both mood and season provided")
 print("-" * 70)
+print('dailyDecision.pick_color(mood="happy", season="summer")')
 dailyDecision.pick_color(mood="happy", season="summer")
 print()
 
 print("Example 1.5: Invalid mood")
 print("-" * 70)
+print('dailyDecision.pick_color(mood="upset")')
 dailyDecision.pick_color(mood="upset")
 print()
 
 print("Example 1.6: Invalid season")
 print("-" * 70)
+print('dailyDecision.pick_color(season="test")')
 dailyDecision.pick_color(season="test")
 print()
 
 print("Example 1.7: Valid season but invalid mood")
 print("-" * 70)
+print('dailyDecision.pick_color(season="summer", mood="upset")')
 dailyDecision.pick_color(season="summer", mood="upset")
 print()
 
 print("Example 1.8: Valid mood but invalid season")
 print("-" * 70)
+print('dailyDecision.pick_color(season="test", mood="energetic")')
 dailyDecision.pick_color(season="test", mood="energetic")
 print()
 
 print("Example 1.9: Both invalid")
 print("-" * 70)
+print('dailyDecision.pick_color(season="test", mood="upset")')
 dailyDecision.pick_color(season="test", mood="upset")
 print()
 
@@ -66,32 +75,39 @@ print()
 
 print("Example 2.1: No arguments - random clothing")
 print("-" * 70)
+print("dailyDecision.pick_clothes()")
 dailyDecision.pick_clothes()
 print()
 
 print("Example 2.2: Only weather provided")
 print("-" * 70)
+print('dailyDecision.pick_clothes(weather="sunny")')
 dailyDecision.pick_clothes(weather="sunny")
 print()
 
 print("Example 2.3: Only occasion provided")
 print("-" * 70)
+print('dailyDecision.pick_clothes(occasion="casual")')
 dailyDecision.pick_clothes(occasion="casual")
 print()
 
 print("Example 2.4: Both weather and occasion provided")
 print("-" * 70)
+print('dailyDecision.pick_clothes(weather="rainy", occasion="formal")')
 dailyDecision.pick_clothes(weather="rainy", occasion="formal")
 print()
 
 print("Example 2.5: Invalid weather")
 print("-" * 70)
+print('dailyDecision.pick_clothes(weather="invalid")')
 dailyDecision.pick_clothes(weather="invalid")
 print()
 
 print("Example 2.6: Invalid occasion")
 print("-" * 70)
+print('dailyDecision.pick_clothes(occasion="invalid")')
 dailyDecision.pick_clothes(occasion="invalid")
+print()
 
 
 # PICK FOOD FUNCTION
@@ -104,16 +120,19 @@ print()
 
 print("Example 3.1: No restriction - random food")
 print("-" * 70)
+print("dailyDecision.pick_food()")
 dailyDecision.pick_food()
 print()
 
 print("Example 3.2: dietary_restriction provided")
 print("-" * 70)
+print('dailyDecision.pick_food("vegetarian")')
 dailyDecision.pick_food("vegetarian")
 print()
 
 print("Example 3.3: Unsupported restriction")
 print("-" * 70)
+print('dailyDecision.pick_food("invalid")')
 dailyDecision.pick_food("invalid")
 print()
 
@@ -127,31 +146,86 @@ print()
 
 print("Example 4.1: No arguments - random activity")
 print("-" * 70)
+print("dailyDecision.pick_activity()")
 dailyDecision.pick_activity()
 print()
 
 print("Example 4.2: Only weather provided")
 print("-" * 70)
+print('dailyDecision.pick_activity(weather="sunny")')
 dailyDecision.pick_activity(weather="sunny")
 print()
 
 print("Example 4.3: Only energy level provided")
 print("-" * 70)
+print('dailyDecision.pick_activity(energy_level="high")')
 dailyDecision.pick_activity(energy_level="high")
 print()
 
 print("Example 4.4: Both weather and energy level provided")
 print("-" * 70)
+print('dailyDecision.pick_activity(weather="snowy", energy_level="low")')
 dailyDecision.pick_activity(weather="snowy", energy_level="low")
 print()
 
 print("Example 4.5: Invalid weather")
 print("-" * 70)
+print('dailyDecision.pick_activity(weather="invalid")')
 dailyDecision.pick_activity(weather="invalid")
 print()
 
 print("Example 4.6: Invalid energy level")
 print("-" * 70)
+print('dailyDecision.pick_activity(energy_level="invalid")')
 dailyDecision.pick_activity(energy_level="invalid")
 print()
 
+# PICK MUSIC FUNCTION
+print("\n" + "=" * 70)
+print(
+    "5. pick_music(prompt) - Get music suggestions based on mood, activity, and/or rhythm keywords"
+)
+print("=" * 70)
+print()
+
+print("Example 5.1: No arguments - random song")
+print("-" * 70)
+print("dailyDecision.pick_music()")
+dailyDecision.pick_music()
+print()
+
+print("Example 5.2: Single mood keyword")
+print("-" * 70)
+print('dailyDecision.pick_music("happy")')
+dailyDecision.pick_music("happy")
+print()
+
+print("Example 5.3: Single activity keyword")
+print("-" * 70)
+print('dailyDecision.pick_music("workout")')
+dailyDecision.pick_music("workout")
+print()
+
+print("Example 5.4: Single rhythm keyword")
+print("-" * 70)
+print('dailyDecision.pick_music("fast")')
+dailyDecision.pick_music("fast")
+print()
+
+print("Example 5.5: Multiple keywords space-separated")
+print("-" * 70)
+print('dailyDecision.pick_music("happy workout")')
+dailyDecision.pick_music("happy workout")
+print()
+
+print("Example 5.6: Multiple keywords with different separator")
+print("-" * 70)
+print('dailyDecision.pick_music("happy-workout,fast")')
+dailyDecision.pick_music("happy-workout,fast")
+print()
+
+print("Example 5.7: Invalid keyword")
+print("-" * 70)
+print('dailyDecision.pick_music("invalid")')
+dailyDecision.pick_music("invalid")
+print()
