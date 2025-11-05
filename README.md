@@ -54,59 +54,59 @@ Suggests clothing items based on weather conditions and/or the occasion.
 Suggests food options based on dietary restrictions.  
 
 ##### **Parameters**:  
-    - `dietary_restriction` (optional): Your dietary need - "halal", "high_protein", "jain", "keto", "kosher", "low_carb", "no_dairy", "no_eggs", "no_gluten", "no_nuts", "no_soy", "paleo", "pescatarian", "vegan", or "vegetarian"
+- `dietary_restriction` (optional): Your dietary need - "halal", "high_protein", "jain", "keto", "kosher", "low_carb", "no_dairy", "no_eggs", "no_gluten", "no_nuts", "no_soy", "paleo", "pescatarian", "vegan", or "vegetarian"
 
 ##### **Behavior**:
-    - No argument: Returns a random food from all available options
-    - Valid restriction: Returns food that meets the specified dietary restriction
-    - Invalid restriction: Displays valid options and suggests a random food from all available options
+- No argument: Returns a random food from all available options
+- Valid restriction: Returns food that meets the specified dietary restriction
+- Invalid restriction: Displays valid options and suggests a random food from all available options
 
 #### 3. `dailyDecision.pick_color(mood, season)`  
 Suggests colors based on your mood and/or the current season.
 
-    **Parameters**:
+##### **Parameters**:
     - `mood` (optional): Your emotional state - "happy", "sad", "calm", "energetic", or "angry"
     - `season` (optional): The current season - "winter", "fall", "summer", or "spring"
 
-    **Behavior**:
-    - No arguments: Returns a random color from all available options
-    - Only mood: Returns a color matching that mood
-    - Only season: Returns a color matching that season
-    - Both valid arguments: Returns a color that fits both (or suggests separate colors if no perfect match)
-    - Both arguments, but only mood is valid: Displays valid options for seasons and suggests a random color matching the mood
-    - Both arguments, but only season is valid: Displays valid options for moods and suggests a random color matching the season
-    - Invalid input: Displays valid options and suggests a random color from all available options
+##### **Behavior**:
+- No arguments: Returns a random color from all available options
+- Only mood: Returns a color matching that mood
+- Only season: Returns a color matching that season
+- Both valid arguments: Returns a color that fits both (or suggests separate colors if no perfect match)
+- Both arguments, but only mood is valid: Displays valid options for seasons and suggests a random color matching the mood
+- Both arguments, but only season is valid: Displays valid options for moods and suggests a random color matching the season
+- Invalid input: Displays valid options and suggests a random color from all available options
 
 #### 4. `dailyDecision.pick_activity(weather, energy_level)`  
 Suggests activities based on weather conditions and/or your energy level.
 
-    **Parameters**:
-    - `weather` (optional): The weather condition - "sunny", "cloudy", "rainy", or "snowy"
-    - `energy_level` (optional): Your current energy - "low", "medium", or "high"
+##### **Parameters**:
+- `weather` (optional): The weather condition - "sunny", "cloudy", "rainy", or "snowy"
+- `energy_level` (optional): Your current energy - "low", "medium", or "high"
 
-    **Behavior**:
-    - No arguments: Returns a random activity from all available options
-    - Only weather: Returns activities suitable for that weather
-    - Only energy level: Returns activities matching your energy level
-    - Both arguments: Returns activities that fit both criteria
-    - Invalid input: Displays valid options and suggests a random activity from all available options
+##### **Behavior**:
+- No arguments: Returns a random activity from all available options
+- Only weather: Returns activities suitable for that weather
+- Only energy level: Returns activities matching your energy level
+- Both arguments: Returns activities that fit both criteria
+- Invalid input: Displays valid options and suggests a random activity from all available options
 
 #### 5. `dailyDecision.pick_music(prompts)`  
 Suggests songs based on the prompt(s) given.
 
-    **Parameters**:
-    - `prompt` (optional) — a keyword describing what kind of music you're looking for
-       - **Mood** examples: "happy", "sad", "calm", "focused", "angry", "romantic", "nostalgic"
-       - **Activity** examples: "study", "workout", "commute", "party", "relex", "focus", "drive", "cook"
-       - **Rhythm** examples: "fast", "mid", "slow", "chill"
+##### **Parameters**:
+- `prompt` (optional) — a keyword describing what kind of music you're looking for
+  - **Mood** examples: "happy", "sad", "calm", "focused", "angry", "romantic", "nostalgic"
+    - **Activity** examples: "study", "workout", "commute", "party", "relex", "focus", "drive", "cook"
+    - **Rhythm** examples: "fast", "mid", "slow", "chill"
 
-    **Behavior**:
-    - No argument: suggests a random song from the full catalog
-    - Prompt matches mood/activity/rhythm: returns a random song from the matching category
-    - Prompt appears in multiple categories:
-       - If categories overlap: return one song representing all categories
-       - If not: return separate songs for each category
-    - Invalid input: displays valid options and suggests a random song
+##### **Behavior**:
+- No argument: suggests a random song from the full catalog
+- Prompt matches mood/activity/rhythm: returns a random song from the matching category
+- Prompt appears in multiple categories:
+  - If categories overlap: return one song representing all categories
+  - If not: return separate songs for each category
+- Invalid input: displays valid options and suggests a random song
 
 ### Example
 For a complete example program that demonstrates all four functions with various parameter combinations, see [exampleUsage.py](./examples/exampleUsage.py).  
